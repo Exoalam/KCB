@@ -1,5 +1,4 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -63,63 +62,89 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
-#bimage {
-    height: 100%;
-    width: 100%;
-    filter: blur(4px);
-    z-index: -1;
-    position: absolute;
+#home_page_panel {
+    margin: 10px auto;
+    width: 50%;
+    background-color: #76ff7da6;
+    padding: 500px 0 0 0;
+    text-align: center;
 }
 
-#head {
-    height: 170px;
-    width: 95%;
-    top: 0;
-    margin: 0 50px 0 50px;
+#Login_Design {
+    height: 40%;
+    width: 100%;
+    border-radius:10px 10px 0 0;
+}
+
+#Authr {
+    height: 60%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #44a16d;
-    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 0 0 10px 10px;
 }
 
-#dept_name {
-    height: 120px;
-    width: 70%;
+#login_page_panel {
+    margin: 100px auto;
+    width: 20%;
+    height: 500px;
+    background-color: #efefef;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 10px;
+}
+
+#Login_btn {
+    height: 30px;
+    width: 100px;
     margin: 0 auto;
     border: none;
-}
-
-#navigation {
-    z-index: 2;
-    height: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-}
-
-#copyright {
-    background-color: white;
-    width: 90%;
-    position: absolute;
-    bottom: 0;
-    left: 100px;
-    text-align: center;
-    height: 30px;
+    border-radius: 10px;
+    background-color: #6fff91;
     box-shadow: 0px 0px 5px 1px black;
 }
 
-.nav_but {
-    box-shadow: none;
+#Reg_btn {
+    height: 30px;
+    width: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
     border: none;
-    padding: 0 56px 0 56px;
-    text-align: center;
+    background-color: #6fff91;
+    box-shadow: 0px 0px 5px 1px black;
 }
 
-.nav_but:hover {
-    background-color: #87ff79;
+#Username_in {
+    background-color: #aeffa5;
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    padding: 5px 20px;
+    box-shadow: 0px 0px 5px 1px black;
 }
-.nav_but:hover:active {
-    background-color: #31ff42;
+}
 
+#Username_in:focus{
+    outline: none;
 }
+
+#Password_in {
+    background-color: #aeffa5;
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    padding: 5px 20px;
+    box-shadow: 0px 0px 5px 1px black;
+}
+}
+
+#Password_in:focus {
+    outline:none;
+}
+
+
+

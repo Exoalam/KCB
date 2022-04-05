@@ -1,0 +1,8 @@
+
+#bimage {
+    height: 100%;
+    width: 100%;
+    filter: blur(4px);
+    z-index: -1;
+    position: absolute;
+}

@@ -1,4 +1,5 @@
-﻿@*<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject NavigationManager UriHelper
+@*<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">KCB</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -32,7 +33,7 @@
             <img src="/Images/Header.png"/>
         </div>
     <div id="navigation">
-        <button class="nav_but">Home</button>
+        <button class="nav_but" @onclick="Home_page">Home</button>
         <button class="nav_but">Facilities</button>
         <button class="nav_but">Research</button>
         <button class="nav_but">Result</button>
@@ -40,7 +41,7 @@
         <button class="nav_but">Academic</button>
         <button class="nav_but">Registation</button>
         <button class="nav_but">PayFee</button>
-        <button class="nav_but" asp-action="check">Login</button>
+        <button class="nav_but" @onclick="Login_page">Login</button>
         <button class="nav_but">KUET</button>
         <button class="nav_but">About</button>
     </div>
@@ -54,5 +55,15 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void Login_page()
+    {
+        UriHelper.NavigateTo("Login");
+    }
+
+    private void Home_page()
+    {
+        UriHelper.NavigateTo("/");
     }
 }
