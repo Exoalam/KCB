@@ -40,6 +40,7 @@
     box-shadow: none;
     border: none;
     padding: 0 55px 0 55px;
+    background-color:white;
     text-align: center;
 }
 
@@ -51,17 +52,4 @@
 
 }
 
-#nav_but {
-    box-shadow: none;
-    border: none;
-    padding: 0 56px 0 56px;
-    text-align: center;
-}
-
-    #nav_but:hover {
-        background-color: #87ff79;
     }
-
-        #nav_but:hover:active {
-            background-color: #31ff42;
-        }
