@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager UriHelper
+@inject NavigationManager UrlHelper
 @*<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">KCB</a>
@@ -39,10 +40,16 @@
         <button class="nav_but">Result</button>
         <button class="nav_but">Notice</button>
         <button class="nav_but">Academic</button>
-        <button class="nav_but">Registation</button>
+        <div class="dropdown">
+           <button class="nav_but">People</button>
+           <div class="dropdown-content">
+           <a href="faculty_members">Faculty Members</a>
+           <a href="#">Officers & Staffs</a>
+           </div>
+        </div>
         <button class="nav_but">PayFee</button>
         <button class="nav_but" @onclick="Login_page">Login</button>
-        <button class="nav_but">KUET</button>
+        <button class="nav_but" onclick="location.href='http://www.kuet.ac.bd/'">KUET</button>
         <button class="nav_but">About</button>
     </div>
     </div>
@@ -66,4 +73,5 @@
     {
         UriHelper.NavigateTo("/");
     }
+
 }
