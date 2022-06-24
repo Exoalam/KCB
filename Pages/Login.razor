@@ -1,15 +1,58 @@
 ﻿@page "/Login"
+
+@using KCB.Data
+@using System.ComponentModel.DataAnnotations
+
+@inject DataBase database
+
 <PageTitle>Login</PageTitle>
 <div id="login_page_panel">
     <div id="Login_Design">
         <br /><h1>Login</h1>
     </div>
     <div id="Authr">
-        <input id="Username_in" placeholder="type your username" type="text" /><br />
-       <input id="Password_in" placeholder="type your password" type="password" /><br />
-        <button id="Login_btn">Login</button><br />
+        <input id="Username_in" placeholder="type your username/email" @bind="email" type="text" /><br />
+        <input id="Password_in" placeholder="type your password" @bind="password" type="password" /><br />
+        <button id="Login_btn" @onclick="Login_click">Login</button><br />
+        <p>@status</p>
     </div>
 </div>
 @code {
+    string email = "";
+    string password = "";
+    string status = "";
 
+    public void Login_click()
+    {
+        if (Email_Check(email))
+        {
+            status = "";
+            if (password.Length < 8)
+            {
+                status = "Password must be atleast 8 character";
+                password = "";
+            }
+            else
+            {
+                status = "";
+
+            }
+        }
+        else
+        {
+            status = "Email not Valid";
+            password = "";
+        }
+
+    }
+
+    public bool Email_Check(string test)
+    {
+        if (new EmailAddressAttribute().IsValid(test))
+            return true;
+        else
+        {
+            return false;
+        }
+    }
 }
