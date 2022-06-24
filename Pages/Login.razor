@@ -4,6 +4,7 @@
 @using System.ComponentModel.DataAnnotations
 
 @inject DataBase database
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Login</PageTitle>
 <div id="login_page_panel">
@@ -24,6 +25,7 @@
 
     public void Login_click()
     {
+
         if (Email_Check(email))
         {
             status = "";
@@ -35,7 +37,7 @@
             else
             {
                 status = "";
-
+                IResponseCookies.Append("Username", "hello");
             }
         }
         else
