@@ -15,7 +15,8 @@
         <input id="Username_in" placeholder="type your username/email" @bind="email" type="text" /><br />
         <input id="Password_in" placeholder="type your password" @bind="password" type="password" /><br />
         <button id="Login_btn" @onclick="Login_click">Login</button><br />
-        <p>@status</p>
+        <button id="Login_btn" @onclick="Reg_btn">Registration</button><br />
+        <p style="color: red">@status</p>
     </div>
 </div>
 @code {
@@ -37,7 +38,6 @@
             else
             {
                 status = "";
-                IResponseCookies.Append("Username", "hello");
             }
         }
         else
@@ -46,6 +46,11 @@
             password = "";
         }
 
+    }
+
+    public void Reg_btn()
+    {
+        
     }
 
     public bool Email_Check(string test)
