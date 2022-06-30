@@ -1,10 +1,11 @@
 ﻿@page "/Login"
-
 @using KCB.Data
 @using System.ComponentModel.DataAnnotations
-
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage BrowserStorage
+@inject NavigationManager UriHelper
+@inject NavigationManager UrlHelper
 @inject DataBase database
-@inject IJSRuntime JSRuntime
 
 <PageTitle>Login</PageTitle>
 <div id="login_page_panel">
@@ -38,8 +39,7 @@
     string attrR = "none";
     string title = "Login";
     string hv = "40%";
-    DataBase dataBase = new DataBase();
-    public void Login_click()
+    public async void Login_click()
     {
 
         if (Email_Check(email))
@@ -53,14 +53,15 @@
             else
             {
                 status = "";
-                if(database.check_acc(email, password) != null)
+                string username = database.check_acc(email, password);
+                if (username == "W")
                 {
-                    status = "Logged IN";
-                    status = database.check_acc(email, password);
+                    status = "Email or Password is wrong";
                 }
                 else
                 {
-                    status = "Email or Password Wrong";
+                    await BrowserStorage.SetAsync("name", username);
+                    UriHelper.NavigateTo("/");
                 }
             }
         }
@@ -80,7 +81,7 @@
         hv = "30%";
     }
 
-    public void signup_btn()
+    public async void signup_btn()
     {
         if (Email_Check(Remail))
         {
@@ -93,7 +94,7 @@
             else
             {
                 status = "";
-                dataBase.create_acc(Ruser, Remail, Rpassword);
+                database.create_acc(Ruser, Remail, Rpassword);
             }
         }
         else
@@ -101,6 +102,7 @@
             status = "Email not Valid";
             Rpassword = "";
         }
+
     }
 
     public bool Email_Check(string test)

@@ -1,10 +1,12 @@
 ﻿@inject NavigationManager UriHelper
 @inject NavigationManager UrlHelper
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage BrowserStorage
 
-    <div id="head">
-        <div id="dept_name">
-            <img src="/Images/Header.png"/>
-        </div>
+<div id="head">
+    <div id="dept_name">
+        <img src="/Images/Header.png" />
+    </div>
     <div id="navigation">
         <button class="nav_but" @onclick="Home_page">Home</button>
         <button class="nav_but">Facilities</button>
@@ -13,22 +15,23 @@
         <button class="nav_but">Notice</button>
         <button class="nav_but">Academic</button>
         <div class="dropdown">
-           <button class="nav_but">People</button>
-           <div class="dropdown-content">
-           <a href="faculty_members">Faculty Members</a>
-           <a href="#">Officers & Staffs</a>
-           </div>
+            <button class="nav_but">People</button>
+            <div class="dropdown-content">
+                <a href="faculty_members">Faculty Members</a>
+                <a href="#">Officers & Staffs</a>
+            </div>
         </div>
         <button class="nav_but">PayFee</button>
         <button class="nav_but" onclick="location.href='http://www.kuet.ac.bd/'">KUET</button>
         <button class="nav_but">About</button>
-        <button class="nav_but" @onclick="Login_page">Login</button>
+        <button class="nav_but" @onclick="Login_page">@Username</button>
     </div>
-    </div>
+</div>
 
 @code {
 
     private bool collapseNavMenu = true;
+    string Username = "Login";
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -42,8 +45,11 @@
         UriHelper.NavigateTo("Login");
     }
 
-    private void Home_page()
+    private async void Home_page()
     {
+        var result = await BrowserStorage.GetAsync<string>("name");
+        string currentInputValue = result.Success ? result.Value : "";
+        Username = currentInputValue;
         UriHelper.NavigateTo("/");
     }
 

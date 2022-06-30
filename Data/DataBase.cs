@@ -10,10 +10,29 @@ namespace KCB.Data
             MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
             var database = dbClient.GetDatabase("Users");
             var collection = database.GetCollection<BsonDocument>("UserLogin");
-            var search = new BsonDocument { { "email", email }, { "password", password } };
-            string check = collection.Find(search).FirstOrDefault().ToString();
-            return check;
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                if(email == doc["email"])
+                {
+                    if(password == doc["password"])
+                    {
+                        return doc["user"].ToString();
+                    }
+                    else
+                    {
+                        return "W";
+                    }
+                }
+                else
+                {
+                    return "W";
+                }
+            }
+            return "W";
+            
         }
+
         public void create_acc(string user, string email, string password)
         {
             MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
