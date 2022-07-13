@@ -94,11 +94,12 @@ a, .btn-link {
 
 #Login_btn {
     height: 40px;
-    width: 100px;
+    width: 120px;
     margin: 0 auto;
     border: none;
     border-radius: 10px;
     background-image: linear-gradient(120deg, #bcffc6, #cbcbcb);
+    font-weight: bold;
 }
 
 #Login_btn:hover {
@@ -230,3 +231,101 @@ a, .btn-link {
         border-radius: 100px;
         padding: 10px 0 0 0;
     }
+
+#PayFee_Panel {
+    margin: 50px auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+    background-color: #c6c6c69e;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 10px;
+}
+
+#Pay_Nav_Panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid black;
+}
+
+    #Pay_Nav_Panel button {
+        box-shadow: none;
+        border: none;
+        padding: 0 50px 0 50px;
+        margin: 10px;
+        background-color: #c6c6c69e;
+        text-align: center;
+        height: 50px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px 1px black;
+        font-weight: bold;
+        
+    }
+
+        #Pay_Nav_Panel button:hover {
+            background-color: #87ff79;
+        }
+
+            #Pay_Nav_Panel button:hover:active {
+                background-color: #31ff42;
+            }
+
+#Pay_Display_Panel {
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    background-color: #c6c6c69e;
+}
+
+#default_pay {
+    height: 100%;
+    width: 100%;
+}
+
+    #default_pay img {
+        height: 30%;
+        width: 20%;
+    }
+
+#course_reg_label label {
+    font-size: 20px;
+    margin: 13px;
+}
+
+#course_reg_value input {
+    font-size: 20px;
+    margin: 11px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 2px;
+}
+
+#course_f_label label {
+    font-size: 20px;
+    margin: 5px;
+}
+
+#course_reg_form button {
+    box-shadow: none;
+    border: none;
+    padding: 0px 50px 0 50px;
+    margin: 100px;
+    background-color: #c6c6c69e;
+    text-align: center;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px black;
+    font-weight: bold;
+    width: 200px;
+}
+
+    #course_reg_form button:hover {
+        background-color: #87ff79;
+    }
+
+        #course_reg_form button:hover:active {
+            background-color: #31ff42;
+        }

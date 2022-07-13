@@ -1,0 +1,141 @@
+﻿@page "/PayFee"
+
+<div id="PayFee_Panel">
+    <div id="Pay_Nav_Panel">
+        <button @onclick="course_reg">Course Registration</button>
+        <button @onclick="hall_fee">Hall Fee</button>
+        <button @onclick="library_fee">Library Fee</button>
+        <button @onclick="utility_fee">Utility Fee</button>
+    </div>
+    <div id="Pay_Display_Panel">
+        <div id="default_pay" style="display:@default_visibility;">
+            <p align="center" style="font-size: 36px;margin: 100px;">Welcome to Online Payment</p>
+            <img draggable="false" src="Images/payment_image.png" />
+        </div>
+        <div id="course_reg" style="display:@course_visibility; height: 100%;">
+            <div id="course_reg_form" style="display:flex; flex-direction:column;border-right:1px solid black;">
+                <br />
+                <p style="font-size: 22px; font-weight: bold;">Khulna University of Engineering & Technology</p>
+                <p style="font-size: 22px; font-weight: bold;">Course Registration Form</p>
+                <br />
+                <br />
+                <div style="display:flex; flex-direction:row">
+                    <div id="course_reg_label" style="display:flex; flex-direction:column;">
+                        <label>Fee Each Term:</label>
+                        <label>Course Registration Fee:</label>
+                        <label>Seat Fee:</label>
+                        <label>Exam Fee:</label>
+                        <label>Grade Sheet:</label>
+                        <label>Student Facility Fee:</label>
+                        <label>Cultural Fee:</label>
+                    </div>
+                    <div id="course_reg_value" style="display:flex; flex-direction:column">
+                        <input type="text" placeholder="320" @bind="cr0"/>
+                        <input type="text" placeholder="500" @bind="cr1"/>
+                        <input type="text" placeholder="40" @bind="cr2"/>
+                        <input type="text" placeholder="350" @bind="cr3"/>
+                        <input type="text" placeholder="25" @bind="cr4"/>
+                        <input type="text" placeholder="545" @bind="cr5"/>
+                        <input type="text" placeholder="85" @bind="cr6"/>
+                    </div>
+                </div>
+            </div>
+            <div id="course_reg_form" style="display:flex; flex-direction:column;margin-left: 50px; ">
+                <br />
+                <br />
+                <br />
+                <div style="display:flex; flex-direction:row;">
+                    <div id="course_f_label" style="display:flex; flex-direction:column;">
+                        <label>Fee Each Term:</label>
+                        <label>Course Registration Fee:</label>
+                        <label>Seat Fee:</label>
+                        <label>Exam Fee:</label>
+                        <label>Grade Sheet:</label>
+                        <label>Student Facility Fee:</label>
+                        <label>Cultural Fee:</label>
+                    </div>
+                    <div id="course_f_label" style="display:flex; flex-direction:column; margin-left: 150px;">
+                        <label>TK @cr0</label>
+                        <label>TK @cr1</label>
+                        <label>TK @cr2</label>
+                        <label>TK @cr3</label>
+                        <label>TK @cr4</label>
+                        <label>TK @cr5</label>
+                        <label>TK @cr6</label>
+                    </div>
+                </div>
+                <label style="border: 1px solid black; height: 2px; width: 500px"></label>
+                 <div style="display:flex; flex-direction:row;">
+                    <div id="course_f_label" style="display:flex; flex-direction:column;">
+                        <label>Total Fee:</label>
+                    </div>
+                    <div id="course_f_label" style="display:flex; flex-direction:column; margin-left: 280px;">
+                        <label>TK @(int.Parse(cr0) + int.Parse(cr1) + int.Parse(cr2) + int.Parse(cr3) + int.Parse(cr4) + int.Parse(cr5) + int.Parse(cr6))</label>
+                    </div>
+                </div>
+                <p align="center">
+                    <button>Pay Now</button>
+                </p>
+            </div>
+        </div>
+        <div id="hall_fee" style="display:@hall_visibility;">
+            <p align="center" style="font-size: 36px;margin: 100px;">Hall Fee</p>
+        </div>
+        <div id="library_fee" style="display:@library_visibility;">
+            <p align="center" style="font-size: 36px;margin: 100px;">Library Fee</p>
+        </div>
+        <div id="utility_fee" style="display:@utility_visibility;">
+            <p align="center" style="font-size: 36px;margin: 100px;">Utility</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string default_visibility = "block";
+    public string course_visibility = "none";
+    public string hall_visibility = "none";
+    public string library_visibility = "none";
+    public string utility_visibility = "none";
+    string cr0 = "320";
+    string cr1 = "500";
+    string cr2 = "40";
+    string cr3 = "350";
+    string cr4 = "25";
+    string cr5 = "545";
+    string cr6 = "85";
+    public void course_reg()
+    {
+        default_visibility = "none";
+        course_visibility = "flex";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+    }
+
+    public void hall_fee()
+    {
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "flex";
+        library_visibility = "none";
+        utility_visibility = "none";
+    }
+
+    public void library_fee()
+    {
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "flex";
+        utility_visibility = "none";
+    }
+
+    public void utility_fee()
+    {
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "flex";
+    }
+}

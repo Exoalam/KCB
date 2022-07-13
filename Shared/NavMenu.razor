@@ -21,7 +21,7 @@
                 <a href="#">Officers & Staffs</a>
             </div>
         </div>
-        <button class="nav_but">PayFee</button>
+        <button class="nav_but" @onclick="PayFee_page">PayFee</button>
         <button class="nav_but" onclick="location.href='http://www.kuet.ac.bd/'">KUET</button>
         <button class="nav_but">About</button>
         <button class="nav_but" @onclick="Login_page">@Username</button>
@@ -43,6 +43,11 @@
     private void Login_page()
     {
         UriHelper.NavigateTo("Login");
+    }
+
+    private void PayFee_page()
+    {
+        UriHelper.NavigateTo("PayFee");
     }
 
     private async void Home_page()
