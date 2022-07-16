@@ -1,4 +1,7 @@
 ﻿@page "/PayFee"
+@using System.IO
+@using iText
+@implements IDisposable
 
 <div id="PayFee_Panel">
     <div id="Pay_Nav_Panel">
@@ -30,13 +33,13 @@
                         <label>Cultural Fee:</label>
                     </div>
                     <div id="course_reg_value" style="display:flex; flex-direction:column">
-                        <input type="text" placeholder="320" @bind="cr0"/>
-                        <input type="text" placeholder="500" @bind="cr1"/>
-                        <input type="text" placeholder="40" @bind="cr2"/>
-                        <input type="text" placeholder="350" @bind="cr3"/>
-                        <input type="text" placeholder="25" @bind="cr4"/>
-                        <input type="text" placeholder="545" @bind="cr5"/>
-                        <input type="text" placeholder="85" @bind="cr6"/>
+                        <input type="text" placeholder="320" @bind="cr0" />
+                        <input type="text" placeholder="500" @bind="cr1" />
+                        <input type="text" placeholder="40" @bind="cr2" />
+                        <input type="text" placeholder="350" @bind="cr3" />
+                        <input type="text" placeholder="25" @bind="cr4" />
+                        <input type="text" placeholder="545" @bind="cr5" />
+                        <input type="text" placeholder="85" @bind="cr6" />
                     </div>
                 </div>
             </div>
@@ -65,7 +68,7 @@
                     </div>
                 </div>
                 <label style="border: 1px solid black; height: 2px; width: 500px"></label>
-                 <div style="display:flex; flex-direction:row;">
+                <div style="display:flex; flex-direction:row;">
                     <div id="course_f_label" style="display:flex; flex-direction:column;">
                         <label>Total Fee:</label>
                     </div>
@@ -74,18 +77,123 @@
                     </div>
                 </div>
                 <p align="center">
-                    <button>Pay Now</button>
+                    <button @onclick="payment">Pay Now</button>
                 </p>
             </div>
         </div>
-        <div id="hall_fee" style="display:@hall_visibility;">
-            <p align="center" style="font-size: 36px;margin: 100px;">Hall Fee</p>
+        <div id="hall_fee" style="display:@hall_visibility; height: 100%;">
+            <div id="Hall_fee_form" style="display:flex; flex-direction:column;border-right:1px solid black;">
+                <br />
+                <p style="font-size: 22px; font-weight: bold;">Khulna University of Engineering & Technology</p>
+                <p style="font-size: 22px; font-weight: bold;">Hall Fee</p>
+                <br />
+                <br />
+                <div style="display:flex; flex-direction:row">
+                    <div id="course_reg_label" style="display:flex; flex-direction:column;">
+                        <label>Fee Each Term:</label>
+                        <label>Course Registration Fee:</label>
+                        <label>Seat Fee:</label>
+                        <label>Exam Fee:</label>
+                        <label>Grade Sheet:</label>
+                        <label>Student Facility Fee:</label>
+                        <label>Cultural Fee:</label>
+                    </div>
+                    <div id="course_reg_value" style="display:flex; flex-direction:column">
+                        <input type="text" placeholder="320" @bind="hf0" />
+                        <input type="text" placeholder="500" @bind="hf1" />
+                        <input type="text" placeholder="40" @bind="hf2" />
+                        <input type="text" placeholder="350" @bind="hf3" />
+                        <input type="text" placeholder="25" @bind="hf4" />
+                        <input type="text" placeholder="545" @bind="hf5" />
+                        <input type="text" placeholder="85" @bind="hf6" />
+                    </div>
+                </div>
+            </div>
+            <div id="Hall_fee_form" style="display:flex; flex-direction:column;margin-left: 50px; ">
+                <br />
+                <br />
+                <br />
+                <div style="display:flex; flex-direction:row;">
+                    <div id="course_f_label" style="display:flex; flex-direction:column;">
+                        <label>Messing Fee:</label>
+                        <label>Course Registration Fee:</label>
+                        <label>Seat Fee:</label>
+                        <label>Exam Fee:</label>
+                        <label>Grade Sheet:</label>
+                        <label>Student Facility Fee:</label>
+                        <label>Cultural Fee:</label>
+                    </div>
+                    <div id="course_f_label" style="display:flex; flex-direction:column; margin-left: 150px;">
+                        <label>TK @hf0</label>
+                        <label>TK @hf1</label>
+                        <label>TK @hf2</label>
+                        <label>TK @hf3</label>
+                        <label>TK @hf4</label>
+                        <label>TK @hf5</label>
+                        <label>TK @hf6</label>
+                    </div>
+                </div>
+                <label style="border: 1px solid black; height: 2px; width: 500px"></label>
+                <div style="display:flex; flex-direction:row;">
+                    <div id="course_f_label" style="display:flex; flex-direction:column;">
+                        <label>Total Fee:</label>
+                    </div>
+                    <div id="course_f_label" style="display:flex; flex-direction:column; margin-left: 280px;">
+                        <label>TK @(int.Parse(hf0) + int.Parse(hf1) + int.Parse(hf2) + int.Parse(hf3) + int.Parse(hf4) + int.Parse(hf5) + int.Parse(hf6))</label>
+                    </div>
+                </div>
+                <p align="center">
+                    <button @onclick="payment">Pay Now</button>
+                </p>
+            </div>
         </div>
         <div id="library_fee" style="display:@library_visibility;">
             <p align="center" style="font-size: 36px;margin: 100px;">Library Fee</p>
         </div>
         <div id="utility_fee" style="display:@utility_visibility;">
             <p align="center" style="font-size: 36px;margin: 100px;">Utility</p>
+        </div>
+        <div id="payment" style="display:@payment_visibility; height: 100%; width:100%;flex-direction:column">
+            <p style="font-size: 36px; font-weight: bold;margin:auto; margin-bottom: 50px;">Choose Payment Method</p>
+            <div style="display:flex; flex-direction:column; margin:auto;">
+                <button @onclick="bkash_payment">
+                    BKash
+                    <img src="/Images/bkash.png" style="height: 30px; width: 30px" />
+                </button>
+                <button>
+                    Credit/Debit card
+                    <img src="/Images/mc.png" style="height: 30px; width: 30px" />
+                    <img src="/Images/vs.png" style="height: 30px; width: 30px" />
+                </button>
+                <button>
+                    Bank
+                    <img src="/Images/bk.png" style="height: 30px; width: 30px" />
+                </button>
+            </div>
+        </div>
+        <div id="bk_payment" style="display:@bkash_visibility; height: 100%; width:100%;flex-direction:column">
+            <p style="font-size: 36px; font-weight: bold;margin:auto; margin-bottom: 50px;">
+                BKash
+                <img src="/Images/bkash.png" style="height: 50px; width: 50px" />
+            </p>
+            <div style="display:flex; flex-direction:row; margin:auto;">
+                <div style="display:flex; flex-direction:column">
+                    <label style="font-size: 20px;margin: 12px;">Mobile Number:</label>
+                    <label style="font-size: 20px;margin: 12px;">Amount:</label>
+                </div>
+                <div style="display:flex; flex-direction:column">
+                    <input type="text" placeholder="Type Mobile Number" @bind="mobile" />
+                    <input type="text" value="@total" />
+                </div>
+            </div>
+            <button @onclick="done_payment">Process Payment</button>
+        </div>
+        <div id="done_payment" style="display:@done_visibility; height: 100%; width:100%;flex-direction:column">
+            <div style="margin:auto; display: flex; flex-direction: row">
+                <img style="height: 100px; width: 100px; margin: 10px;" src="/Images/payment Done.png" />
+                <p style="font-size: 36px; font-weight: bold; margin-top: 30px;">Payment Complete</p>
+            </div>
+            <a href="/receipt.pdf" download>Download Receipt</a>
         </div>
     </div>
 </div>
@@ -96,6 +204,11 @@
     public string hall_visibility = "none";
     public string library_visibility = "none";
     public string utility_visibility = "none";
+    public string payment_visibility = "none";
+    public string bkash_visibility = "none";
+    public string cd_visibility = "none";
+    public string bank_visibility = "none";
+    public string done_visibility = "none";
     string cr0 = "320";
     string cr1 = "500";
     string cr2 = "40";
@@ -103,6 +216,15 @@
     string cr4 = "25";
     string cr5 = "545";
     string cr6 = "85";
+    string hf0 = "1100";
+    string hf1 = "500";
+    string hf2 = "40";
+    string hf3 = "350";
+    string hf4 = "25";
+    string hf5 = "545";
+    string hf6 = "85";
+    string mobile = "";
+    int total = 0;
     public void course_reg()
     {
         default_visibility = "none";
@@ -110,6 +232,9 @@
         hall_visibility = "none";
         library_visibility = "none";
         utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        done_visibility = "none";
     }
 
     public void hall_fee()
@@ -119,6 +244,9 @@
         hall_visibility = "flex";
         library_visibility = "none";
         utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        done_visibility = "none";
     }
 
     public void library_fee()
@@ -128,6 +256,9 @@
         hall_visibility = "none";
         library_visibility = "flex";
         utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        done_visibility = "none";
     }
 
     public void utility_fee()
@@ -137,5 +268,68 @@
         hall_visibility = "none";
         library_visibility = "none";
         utility_visibility = "flex";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        done_visibility = "none";
     }
-}
+
+    public void payment()
+    {
+        if(course_visibility == "none")
+        {
+            total = int.Parse(hf0) + int.Parse(hf1) + int.Parse(hf2) + int.Parse(hf3) + int.Parse(hf4) + int.Parse(hf5) + int.Parse(hf6);
+        }
+        else if(hall_visibility == "none")
+        {
+            total = int.Parse(cr0) + int.Parse(cr1) + int.Parse(cr2) + int.Parse(cr3) + int.Parse(cr4) + int.Parse(cr5) + int.Parse(cr6);
+        }
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+        payment_visibility = "flex";
+        bkash_visibility = "none";
+        done_visibility = "none";
+    }
+
+    public void bkash_payment()
+    {
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "flex";
+        done_visibility = "none";
+    }
+
+    public void done_payment()
+    {
+        pdf_maker();
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        done_visibility = "flex";
+    }
+
+    public void pdf_maker()
+    {
+        string html = (total).ToString();
+        File.WriteAllText("receipt.html", html);
+        iText.Html2pdf.HtmlConverter.ConvertToPdf(
+        new FileInfo("receipt.html"),
+        new FileInfo("wwwroot/receipt.pdf"));
+    }
+
+    public void Dispose()
+    {
+        File.Delete("receipt.html");
+        File.Delete("wwwroot/receipt.pdf");
+    }
+    }

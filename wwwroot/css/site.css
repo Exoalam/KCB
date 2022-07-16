@@ -329,3 +329,100 @@ a, .btn-link {
         #course_reg_form button:hover:active {
             background-color: #31ff42;
         }
+#payment button {
+    box-shadow: none;
+    border: none;
+    padding: 0px 20px 0 20px;
+    margin: 20px;
+    background-color: #c6c6c69e;
+    text-align: center;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px black;
+    font-weight: bold;
+    width: 250px;
+}
+#payment button:hover {
+    background-color: #87ff79;
+}
+
+    #payment button:hover:active {
+        background-color: #31ff42;
+    }
+
+#bk_payment input {
+    font-size: 20px;
+    margin: 11px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 2px;
+}
+
+#bk_payment button {
+    box-shadow: none;
+    border: none;
+    padding: 0px 50px 0 50px;
+    margin: auto;
+    background-color: #c6c6c69e;
+    text-align: center;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px black;
+    font-weight: bold;
+    width: 200px;
+}
+
+    #bk_payment button:hover {
+        background-color: #87ff79;
+    }
+
+        #bk_payment button:hover:active {
+            background-color: #31ff42;
+        }
+
+#done_payment a {
+    box-shadow: none;
+    border: none;
+    padding: 0px 50px 0 50px;
+    margin: auto;
+    background-color: #c6c6c69e;
+    text-align: center;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px black;
+    font-weight: bold;
+    width: 200px;
+    text-decoration: none;
+    color: black;
+}
+
+    #done_payment a:hover {
+        background-color: #87ff79;
+    }
+
+        #done_payment a:hover:active {
+            background-color: #31ff42;
+        }
+
+#Hall_fee_form button {
+    box-shadow: none;
+    border: none;
+    padding: 0px 50px 0 50px;
+    margin: 100px;
+    background-color: #c6c6c69e;
+    text-align: center;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px black;
+    font-weight: bold;
+    width: 200px;
+}
+
+    #Hall_fee_form button:hover {
+        background-color: #87ff79;
+    }
+
+        #Hall_fee_form button:hover:active {
+            background-color: #31ff42;
+        }
