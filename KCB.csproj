@@ -7,20 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Temp\**" />
+    <Content Remove="wwwroot\Temp\**" />
+    <EmbeddedResource Remove="wwwroot\Temp\**" />
+    <None Remove="wwwroot\Temp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspose.HTML" Version="22.6.0" />
     <PackageReference Include="Blazor.Extensions.Storage" Version="1.0.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
     <PackageReference Include="HtmlRenderer.PdfSharp" Version="1.5.0.6" />
+    <PackageReference Include="itext7" Version="7.2.3" />
     <PackageReference Include="itext7.pdfhtml" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Temp\" />
   </ItemGroup>
 
 </Project>

@@ -19,14 +19,6 @@ namespace KCB.Data
                     {
                         return doc["user"].ToString();
                     }
-                    else
-                    {
-                        return "W";
-                    }
-                }
-                else
-                {
-                    return "W";
                 }
             }
             return "W";

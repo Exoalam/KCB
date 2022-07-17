@@ -5,6 +5,7 @@
 @inject ProtectedSessionStorage BrowserStorage
 @inject NavigationManager UriHelper
 @inject NavigationManager UrlHelper
+@inject NavigationManager _navigationManager
 @inject DataBase database
 
 <PageTitle>Login</PageTitle>
@@ -23,7 +24,6 @@
         <input id="Username_R" placeholder="type your username" @bind="Ruser" type="text" /><br />
         <input id="email_R" placeholder="type your email" @bind="Remail" type="text" /><br />
         <input id="Password_R" placeholder="type your password" @bind="Rpassword" type="password" /><br />
-        <input id="Password_R" placeholder="confirm your password" @bind="Rpassword" type="password" /><br />
         <button id="Login_btn" @onclick="signup_btn">Sign Up</button><br />
         <p style="color: red">@status</p>
     </div>
@@ -61,7 +61,9 @@
                 else
                 {
                     await BrowserStorage.SetAsync("name", username);
-                    UriHelper.NavigateTo("/");
+                    NavMenu.loginrender = true;
+                    _navigationManager.NavigateTo("/", true);
+                    
                 }
             }
         }

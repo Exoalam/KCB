@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage BrowserStorage
 
+
 <div id="head">
     <div id="dept_name">
         <img src="/Images/Header.png" />
@@ -27,9 +28,8 @@
         <button class="nav_but" @onclick="Login_page">@Username</button>
     </div>
 </div>
-
 @code {
-
+    public static bool loginrender = false;
     private bool collapseNavMenu = true;
     string Username = "Login";
 
@@ -52,10 +52,23 @@
 
     private async void Home_page()
     {
-        var result = await BrowserStorage.GetAsync<string>("name");
-        string currentInputValue = result.Success ? result.Value : "";
-        Username = currentInputValue;
         UriHelper.NavigateTo("/");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && loginrender)
+        {
+            await LoadStateAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadStateAsync()
+    {
+        var result = await BrowserStorage.GetAsync<string>("name");
+        Username = result.Value.ToString();
+
     }
 
 }
