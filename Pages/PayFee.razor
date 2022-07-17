@@ -34,13 +34,13 @@
                         <label>Cultural Fee:</label>
                     </div>
                     <div id="course_reg_value" style="display:flex; flex-direction:column">
-                        <input type="text" placeholder="320" @bind="cr0" />
-                        <input type="text" placeholder="500" @bind="cr1" />
-                        <input type="text" placeholder="40" @bind="cr2" />
-                        <input type="text" placeholder="350" @bind="cr3" />
-                        <input type="text" placeholder="25" @bind="cr4" />
-                        <input type="text" placeholder="545" @bind="cr5" />
-                        <input type="text" placeholder="85" @bind="cr6" />
+                        <input type="number" placeholder="320" @bind="cr0" />
+                        <input type="number" placeholder="500" @bind="cr1" />
+                        <input type="number" placeholder="40" @bind="cr2" />
+                        <input type="number" placeholder="350" @bind="cr3" />
+                        <input type="number" placeholder="25" @bind="cr4" />
+                        <input type="number" placeholder="545" @bind="cr5" />
+                        <input type="number" placeholder="85" @bind="cr6" />
                     </div>
                 </div>
             </div>
@@ -104,17 +104,17 @@
                         <label>Religion:</label>
                     </div>
                     <div id="course_reg_value" style="display:flex; flex-direction:column">
-                        <input type="text" placeholder="1100" @bind="hf0" />
-                        <input type="text" placeholder="60" @bind="hf1" />
-                        <input type="text" placeholder="400" @bind="hf2" />
-                        <input type="text" placeholder="200" @bind="hf3" />
-                        <input type="text" placeholder="100" @bind="hf4" />
-                        <input type="text" placeholder="60" @bind="hf5" />
-                        <input type="text" placeholder="60" @bind="hf6" />
-                        <input type="text" placeholder="50" @bind="hf7" />
-                        <input type="text" placeholder="100" @bind="hf8" />
-                        <input type="text" placeholder="100" @bind="hf9" />
-                        <input type="text" placeholder="60" @bind="hf10" />
+                        <input type="number" placeholder="1100" @bind="hf0" />
+                        <input type="number" placeholder="60" @bind="hf1" />
+                        <input type="number" placeholder="400" @bind="hf2" />
+                        <input type="number" placeholder="200" @bind="hf3" />
+                        <input type="number" placeholder="100" @bind="hf4" />
+                        <input type="number" placeholder="60" @bind="hf5" />
+                        <input type="number" placeholder="60" @bind="hf6" />
+                        <input type="number" placeholder="50" @bind="hf7" />
+                        <input type="number" placeholder="100" @bind="hf8" />
+                        <input type="number" placeholder="100" @bind="hf9" />
+                        <input type="number" placeholder="60" @bind="hf10" />
                     </div>
                 </div>
             </div>
@@ -177,8 +177,8 @@
                         <label>Fines:</label>
                     </div>
                     <div id="course_reg_value" style="display:flex; flex-direction:column">
-                        <input type="text" @bind="lf0" />
-                        <input type="text" @bind="lf1" />
+                        <input type="number" @bind="lf0" />
+                        <input type="number" @bind="lf1" />
                     </div>
                 </div>
             </div>
@@ -225,10 +225,10 @@
                         <label>Tour & Feastival:</label>
                     </div>
                     <div id="course_reg_value" style="display:flex; flex-direction:column">
-                        <input type="text" @bind="uf0" />
-                        <input type="text" @bind="uf1" />
-                        <input type="text" @bind="uf2" />
-                        <input type="text" @bind="uf3" />
+                        <input type="number" @bind="uf0" />
+                        <input type="number" @bind="uf1" />
+                        <input type="number" @bind="uf2" />
+                        <input type="number" @bind="uf3" />
                     </div>
                 </div>
             </div>
@@ -293,8 +293,8 @@
                     <label style="font-size: 20px;margin: 12px;">Amount:</label>
                 </div>
                 <div style="display:flex; flex-direction:column">
-                    <input type="text" placeholder="Type Mobile Number" @bind="mobile" />
-                    <input type="text" value="@amount" />
+                    <input type="number" placeholder="Type Mobile Number" @bind="mobile" />
+                    <input type="number" value="@amount" />
                 </div>
             </div>
             <button @onclick="done_payment">Process Payment</button>

@@ -5,9 +5,10 @@ namespace KCB.Data
 {
     public class DataBase
     {
+        MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
         public string check_acc(string email, string password)
         {
-            MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
+   
             var database = dbClient.GetDatabase("Users");
             var collection = database.GetCollection<BsonDocument>("UserLogin");
             var documents = collection.Find(new BsonDocument()).ToList();
@@ -17,6 +18,7 @@ namespace KCB.Data
                 {
                     if(password == doc["password"])
                     {
+
                         return doc["user"].ToString();
                     }
                 }
@@ -24,7 +26,6 @@ namespace KCB.Data
             return "W";
             
         }
-
         public void create_acc(string user, string email, string password)
         {
             MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
