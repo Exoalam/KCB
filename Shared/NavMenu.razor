@@ -1,5 +1,5 @@
 ﻿@inject NavigationManager UriHelper
-@inject NavigationManager UrlHelper
+@inject NavigationManager _navigationManager
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage BrowserStorage
 
@@ -25,7 +25,16 @@
         <button class="nav_but" @onclick="PayFee_page">PayFee</button>
         <button class="nav_but" onclick="location.href='http://www.kuet.ac.bd/'">KUET</button>
         <button class="nav_but">About</button>
-        <button class="nav_but" @onclick="Login_page">@Username</button>
+        <div class="dropdown">
+            <button class="nav_but" @onclick="Login_page">@Username</button>
+            @if (loginrender)
+            {
+                <div class="dropdown-content">
+                    <a href="#" style="width: 169px;">Profile</a>
+                    <a @onclick="Logout" style="width: 169px;">Logout</a>
+                </div>
+            }
+        </div>
     </div>
 </div>
 @code {
@@ -76,6 +85,15 @@
     {
         var result = await BrowserStorage.GetAsync<string>("name");
         Username = result.Value.ToString();
+
+    }
+
+    private async Task Logout()
+    {
+        await BrowserStorage.SetAsync("name", "");
+        Username = "Login";
+        loginrender = false;
+        _navigationManager.NavigateTo("/", true);
 
     }
 
