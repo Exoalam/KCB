@@ -1,0 +1,134 @@
+﻿@page "/Result"
+@using KCB.Data
+@using MongoDB.Bson;
+@inject DataBase database
+
+<div id="Result_panel">
+    <p style="font-size: 32px; font-weight: bold; margin: auto">Academic Record</p>
+    <nav class="row navbar">
+        <br><br>
+        @if (database.get_result(NavMenu.Username, "1.1")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r1_1["SESSION"]</b> &nbsp; &nbsp; Year : <b>First</b> &nbsp; &nbsp; Term : <b>First</b></td><td align="right">Period :<b>@r1_1["PERIOD"]</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 1100</td><td align="left">&nbsp;Introduction to Computer Systems</td><td>1.50</td><td>@r1_1["CSE1100"]</td><td>@GRADE[r1_1["CSE1100"].ToString()]</td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 1107</td><td align="left">&nbsp;Discrete Mathematics</td><td>3.00</td><td>@r1_1["CSE1107"]</td><td>@GRADE[r1_1["CSE1107"].ToString()]</td></tr><tr align="center"><td>3</td><td align="left">&nbsp;EEE 1107</td><td align="left">&nbsp;Basic Electrical Engineering</td><td>3.00</td><td>@r1_1["EEE1107"]</td><td>@GRADE[r1_1["EEE1107"].ToString()]</td></tr><tr align="center"><td>4</td><td align="left">&nbsp;EEE 1108</td><td align="left">&nbsp;Basic Electrical Engineering Laboratory</td><td>1.50</td><td>@r1_1["EEE1108"]</td><td>@GRADE[r1_1["EEE1108"].ToString()]</td></tr><tr align="center"><td>5</td><td align="left">&nbsp;HUM 1107</td><td align="left">&nbsp;English and Human Communication</td><td>3.00</td><td>@r1_1["HUM1107"]</td><td>@GRADE[r1_1["HUM1107"].ToString()]</td></tr><tr align="center"><td>6</td><td align="left">&nbsp;HUM 1108</td><td align="left">&nbsp;English Skills Laboratory</td><td>0.75</td><td>@r1_1["HUM1108"]</td><td>@GRADE[r1_1["HUM1108"].ToString()]</td></tr><tr align="center"><td>7</td><td align="left">&nbsp;MATH 1107</td><td align="left">&nbsp;Differential and Integral Calculus</td><td>3.00</td><td>@r1_1["MATH1107"]</td><td>@GRADE[r1_1["MATH1107"].ToString()]</td></tr><tr align="center"><td>8</td><td align="left">&nbsp;PHY 1107</td><td align="left">&nbsp;Physics</td><td>3.00</td><td>@r1_1["PHY1107"]</td><td>@GRADE[r1_1["MATH1107"].ToString()]</td></tr><tr align="center"><td>9</td><td align="left">&nbsp;PHY 1108</td><td align="left">&nbsp;Physics Laboratory</td><td>1.50</td><td>@r1_1["PHY1108"]</td><td>@GRADE[r1_1["PHY1108"].ToString()]</td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>20.25</b></td><td> Credit Completed : <b>@r1_1["CC"]</b></td><td align="right"> Term GPA : <b>@r1_1["GPA"]</b></td></tr><tr><td> Total Credit Completed : <b>@r1_1["TCC"]</b></td><td></td><td align="right"> CGPA : <b>@r1_1["CGPA"]</b></td></tr></tbody></table> <br>
+            <br>
+            <br>
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "1.2")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r1_2["SESSION"]</b> &nbsp; &nbsp; Year : <b>First</b> &nbsp; &nbsp; Term : <b>Second</b></td><td align="right">Period :<b>@r1_2["PERIOD"]</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 1201</td><td align="left">&nbsp;Structured Programming</td><td>3.00</td><td>@r1_2["CSE1201"]</td><td>@GRADE[r1_2["CSE1201"].ToString()]</td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 1202</td><td align="left">&nbsp;Structured Programming Laboratory</td><td>1.50</td><td>@r1_2["CSE1202"]</td><td>@GRADE[r1_2["CSE1202"].ToString()]</td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 1203</td><td align="left">&nbsp;Digital Logic Design</td><td>3.00</td><td>@r1_2["CSE1203"]</td><td>@GRADE[r1_2["CSE1203"].ToString()]</td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CHEM 1207</td><td align="left">&nbsp;Chemistry </td><td>3.00</td><td>@r1_2["CHEM1207"]</td><td>@GRADE[r1_2["CHEM1207"].ToString()]</td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 1204</td><td align="left">&nbsp;Digital Logic Design Laboratory</td><td>1.50</td><td>@r1_2["CSE1204"]</td><td>@GRADE[r1_2["CSE1204"].ToString()]</td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CHEM 1208</td><td align="left">&nbsp;Chemistry Laboratory</td><td>0.75</td><td>@r1_2["CHEM1208"]</td><td>@GRADE[r1_2["CHEM1208"].ToString()]</td></tr><tr align="center"><td>7</td><td align="left">&nbsp;EEE 1217</td><td align="left">&nbsp;Analog Electronics </td><td>3.00</td><td>@r1_2["EEE1217"]</td><td>@GRADE[r1_2["EEE1217"].ToString()]</td></tr><tr align="center"><td>8</td><td align="left">&nbsp;EEE 1218</td><td align="left">&nbsp;Analog Electronics Laboratory</td><td>0.75</td><td>@r1_2["EEE1218"]</td><td>@GRADE[r1_2["EEE1218"].ToString()]</td></tr><tr align="center"><td>9</td><td align="left">&nbsp;MATH 1207</td><td align="left">&nbsp;Coordinate Geometry and Differential Equations</td><td>3.00</td><td>@r1_2["MATH1207"]</td><td>@GRADE[r1_2["MATH1207"].ToString()]</td></tr><tr align="center"><td>10</td><td align="left">&nbsp;ME 1270</td><td align="left">&nbsp;Computer Aided Design Laboratory</td><td>0.75</td><td>@r1_2["ME1270"]</td><td>@GRADE[r1_2["ME1270"].ToString()]</td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>20.25</b></td><td> Credit Completed : <b>@r1_2["CC"]</b></td><td align="right"> Term GPA : <b>@r1_2["GPA"]</b></td></tr><tr><td> Total Credit Completed : <b>@r1_2["TCC"]</b></td><td></td><td align="right"> CGPA : <b>@r1_2["CGPA"]</b></td></tr></tbody></table> <br>
+
+            <br>
+
+            <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "2.1")["SESSION"] != "NO DATA")
+        {
+
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r2_2["SESSION"]</b> &nbsp; &nbsp; Year : <b>Second</b> &nbsp; &nbsp; Term : <b>Second</b></td><td align="right">Period :<b>@r2_1["PERIOD"]</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 2101</td><td align="left">&nbsp;Object Oriented Programming</td><td>3.00</td><td>@r2_1["CSE2101"]</td><td>@GRADE[r2_1["CSE2101"].ToString()]</td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 2102</td><td align="left">&nbsp;Object Oriented Programming Laboratory</td><td>1.50</td><td>@r2_1["CSE2102"]</td><td>@GRADE[r2_1["CSE2102"].ToString()]</td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 2105</td><td align="left">&nbsp;Data Structures and Algorithms</td><td>3.00</td><td>@r2_1["CSE2105"]</td><td>@GRADE[r2_1["CSE2105"].ToString()]</td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 2106</td><td align="left">&nbsp;Data Structures and Algorithms Laboratory</td><td>1.50</td><td>@r2_1["CSE2106"]</td><td>@GRADE[r2_1["CSE2106"].ToString()]</td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 2113</td><td align="left">&nbsp;Computer Architecture</td><td>3.00</td><td>@r2_1["CSE2113"]</td><td>@GRADE[r2_1["CSE2113"].ToString()]</td></tr><tr align="center"><td>6</td><td align="left">&nbsp;EEE 2113</td><td align="left">&nbsp;Digital Electronics</td><td>3.00</td><td>@r2_1["EEE2113"]</td><td>@GRADE[r2_1["EEE2113"].ToString()]</td></tr><tr align="center"><td>7</td><td align="left">&nbsp;EEE 2114</td><td align="left">&nbsp;Digital Electronics Laboratory</td><td>1.50</td><td>@r2_1["EEE2114"]</td><td>@GRADE[r2_1["EEE2114"].ToString()]</td></tr><tr align="center"><td>8</td><td align="left">&nbsp;MATH 2107</td><td align="left">&nbsp;Fourier Analysis and Linear Algebra</td><td>3.00</td><td>@r2_1["MATH2107"]</td><td>@GRADE[r2_1["MATH2107"].ToString()]</td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>19.50</b></td><td> Credit Completed : <b>@r2_1["CC"]</b></td><td align="right"> Term GPA : <b>@r2_1["GPA"]</b></td></tr><tr><td> Total Credit Completed : <b>@r2_1["TCC"]</b></td><td></td><td align="right"> CGPA : <b>@r2_1["CGPA"]</b></td></tr></tbody></table> <br>
+
+            <br>
+
+            <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "2.2")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r2_2["SESSION"]</b> &nbsp; &nbsp; Year : <b>Second</b> &nbsp; &nbsp; Term : <b>Second</b></td><td align="right">Period :<b>@r2_2["PERIOD"]</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 2200</td><td align="left">&nbsp;Advanced Programming </td><td>1.50</td><td>@r2_2["CSE2200"]</td><td>@GRADE[r2_2["CSE2200"].ToString()]</td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 2201</td><td align="left">&nbsp;Algorithm Analysis and Design</td><td>3.00</td><td>@r2_2["CSE2201"]</td><td>@GRADE[r2_2["CSE2201"].ToString()]</td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 2202</td><td align="left">&nbsp;Algorithm Analysis and Design Laboratory</td><td>1.50</td><td>@r2_2["CSE2202"]</td><td>@GRADE[r2_2["CSE2202"].ToString()]</td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 2203</td><td align="left">&nbsp;Microprocessors and Microcontrollers</td><td>3.00</td><td>@r2_2["CSE2203"]</td><td>@GRADE[r2_2["CSE2203"].ToString()]</td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 2204</td><td align="left">&nbsp;Microprocessors and Microcontrollers Laboratory</td><td>1.50</td><td>@r2_2["CSE2204"]</td><td>@GRADE[r2_2["CSE2204"].ToString()]</td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CSE 2207</td><td align="left">&nbsp;Numerical Methods</td><td>3.00</td><td>@r2_2["CSE2207"]</td><td>@GRADE[r2_2["CSE2207"].ToString()]</td></tr><tr align="center"><td>7</td><td align="left">&nbsp;CSE 2208</td><td align="left">&nbsp;Numerical Methods Laboratory</td><td>0.75</td><td>@r2_2["CSE2208"]</td><td>@GRADE[r2_2["CSE2208"].ToString()]</td></tr><tr align="center"><td>8</td><td align="left">&nbsp;HUM 2207</td><td align="left">&nbsp;Economics and Accounting</td><td>3.00</td><td>@r2_2["HUM2207"]</td><td>@GRADE[r2_2["HUM2207"].ToString()]</td></tr><tr align="center"><td>9</td><td align="left">&nbsp;MATH 2207</td><td align="left">&nbsp;Complex Variable, Vector Analysis and Statistics </td><td>3.00</td><td>@r2_2["MATH2207"]</td><td>@GRADE[r2_2["MATH2207"].ToString()]</td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>20.25</b></td><td> Credit Completed : <b>@r2_2["CC"]</b></td><td align="right"> Term GPA : <b>@r2_2["GPA"]</b></td></tr><tr><td> Total Credit Completed : <b>@r2_2["TCC"]</b></td><td></td><td align="right"> CGPA : <b>@r2_2["CGPA"]</b></td></tr></tbody></table> <br>
+
+            <br>
+
+            <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "3.1")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r3_1["SESSION"]</b> &nbsp; &nbsp; Year : <b>Third</b> &nbsp; &nbsp; Term : <b>First</b></td><td align="right">Period :<b>March 30, 2022 to September 29, 2022</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 3100</td><td align="left">&nbsp;Web Programming Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 3101</td><td align="left">&nbsp;Theory of Computation</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 3103</td><td align="left">&nbsp;Peripherals  and Interfacing</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 3104</td><td align="left">&nbsp;Peripherals and Interfacing Laboratory</td><td>0.75</td><td></td><td></td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 3109</td><td align="left">&nbsp;Database Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CSE 3110</td><td align="left">&nbsp;Database Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>7</td><td align="left">&nbsp;CSE 3119</td><td align="left">&nbsp;Software Engineering and Information Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>8</td><td align="left">&nbsp;CSE 3120</td><td align="left">&nbsp;Software Engineering &amp; Information Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>9</td><td align="left">&nbsp;ECE 3115</td><td align="left">&nbsp;Data Communication</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>10</td><td align="left">&nbsp;ECE 3116</td><td align="left">&nbsp;Data Communication Laboratory</td><td>0.75</td><td></td><td></td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>21.00</b></td><td> Credit Completed : <b>0.00</b></td><td align="right"> Term GPA : <b>0</b></td></tr><tr><td> Total Credit Completed : <b>80.25</b></td><td></td><td align="right"> CGPA : <b>3.71</b></td></tr></tbody></table> <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "3.2")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r3_2["SESSION"]</b> &nbsp; &nbsp; Year : <b>Third</b> &nbsp; &nbsp; Term : <b>First</b></td><td align="right">Period :<b>March 30, 2022 to September 29, 2022</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 3100</td><td align="left">&nbsp;Web Programming Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 3101</td><td align="left">&nbsp;Theory of Computation</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 3103</td><td align="left">&nbsp;Peripherals  and Interfacing</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 3104</td><td align="left">&nbsp;Peripherals and Interfacing Laboratory</td><td>0.75</td><td></td><td></td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 3109</td><td align="left">&nbsp;Database Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CSE 3110</td><td align="left">&nbsp;Database Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>7</td><td align="left">&nbsp;CSE 3119</td><td align="left">&nbsp;Software Engineering and Information Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>8</td><td align="left">&nbsp;CSE 3120</td><td align="left">&nbsp;Software Engineering &amp; Information Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>9</td><td align="left">&nbsp;ECE 3115</td><td align="left">&nbsp;Data Communication</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>10</td><td align="left">&nbsp;ECE 3116</td><td align="left">&nbsp;Data Communication Laboratory</td><td>0.75</td><td></td><td></td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>21.00</b></td><td> Credit Completed : <b>0.00</b></td><td align="right"> Term GPA : <b>0</b></td></tr><tr><td> Total Credit Completed : <b>80.25</b></td><td></td><td align="right"> CGPA : <b>3.71</b></td></tr></tbody></table> <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "4.1")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r4_1["SESSION"]</b> &nbsp; &nbsp; Year : <b>Third</b> &nbsp; &nbsp; Term : <b>First</b></td><td align="right">Period :<b>March 30, 2022 to September 29, 2022</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 3100</td><td align="left">&nbsp;Web Programming Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 3101</td><td align="left">&nbsp;Theory of Computation</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 3103</td><td align="left">&nbsp;Peripherals  and Interfacing</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 3104</td><td align="left">&nbsp;Peripherals and Interfacing Laboratory</td><td>0.75</td><td></td><td></td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 3109</td><td align="left">&nbsp;Database Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CSE 3110</td><td align="left">&nbsp;Database Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>7</td><td align="left">&nbsp;CSE 3119</td><td align="left">&nbsp;Software Engineering and Information Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>8</td><td align="left">&nbsp;CSE 3120</td><td align="left">&nbsp;Software Engineering &amp; Information Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>9</td><td align="left">&nbsp;ECE 3115</td><td align="left">&nbsp;Data Communication</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>10</td><td align="left">&nbsp;ECE 3116</td><td align="left">&nbsp;Data Communication Laboratory</td><td>0.75</td><td></td><td></td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>21.00</b></td><td> Credit Completed : <b>0.00</b></td><td align="right"> Term GPA : <b>0</b></td></tr><tr><td> Total Credit Completed : <b>80.25</b></td><td></td><td align="right"> CGPA : <b>3.71</b></td></tr></tbody></table> <br>
+
+            <br>
+        }
+        @if (database.get_result(NavMenu.Username, "4.2")["SESSION"] != "NO DATA")
+        {
+            <table width="100%"><tbody><tr><td align="left">Session : <b>@r4_2["SESSION"]</b> &nbsp; &nbsp; Year : <b>Third</b> &nbsp; &nbsp; Term : <b>First</b></td><td align="right">Period :<b>March 30, 2022 to September 29, 2022</b> </td></tr> </tbody></table>
+            <table width="100%" style="border-collapse:collapse;" border="1"><tbody><tr align="center" height="30"><th width="60">Sl. No.</th><th width="100">Course No.</th><th>Course Title</th><th width="60">Credit</th><th width="100">Grade Point</th><th width="100">Letter Grade</th></tr><tr align="center"><td>1</td><td align="left">&nbsp;CSE 3100</td><td align="left">&nbsp;Web Programming Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>2</td><td align="left">&nbsp;CSE 3101</td><td align="left">&nbsp;Theory of Computation</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>3</td><td align="left">&nbsp;CSE 3103</td><td align="left">&nbsp;Peripherals  and Interfacing</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>4</td><td align="left">&nbsp;CSE 3104</td><td align="left">&nbsp;Peripherals and Interfacing Laboratory</td><td>0.75</td><td></td><td></td></tr><tr align="center"><td>5</td><td align="left">&nbsp;CSE 3109</td><td align="left">&nbsp;Database Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>6</td><td align="left">&nbsp;CSE 3110</td><td align="left">&nbsp;Database Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>7</td><td align="left">&nbsp;CSE 3119</td><td align="left">&nbsp;Software Engineering and Information Systems</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>8</td><td align="left">&nbsp;CSE 3120</td><td align="left">&nbsp;Software Engineering &amp; Information Systems Laboratory</td><td>1.50</td><td></td><td></td></tr><tr align="center"><td>9</td><td align="left">&nbsp;ECE 3115</td><td align="left">&nbsp;Data Communication</td><td>3.00</td><td></td><td></td></tr><tr align="center"><td>10</td><td align="left">&nbsp;ECE 3116</td><td align="left">&nbsp;Data Communication Laboratory</td><td>0.75</td><td></td><td></td></tr></tbody></table>
+            <table width="100%"><tbody><tr><td> Credit Taken : <b>21.00</b></td><td> Credit Completed : <b>0.00</b></td><td align="right"> Term GPA : <b>0</b></td></tr><tr><td> Total Credit Completed : <b>80.25</b></td><td></td><td align="right"> CGPA : <b>3.71</b></td></tr></tbody></table> <br>
+
+            <br>
+        }
+    </nav>
+</div>
+@code {
+    BsonDocument r1_1, r1_2, r2_1, r2_2, r3_1, r3_2, r4_1, r4_2, GRADE;
+    public void rd()
+    {
+        r1_1 = database.get_result(NavMenu.Username, "1.1");
+    }
+    protected override void OnInitialized()
+    {
+        GRADE = database.grade();
+        if (database.get_result(NavMenu.Username, "1.1")["SESSION"] != "NO DATA")
+        {
+            r1_1 = database.get_result(NavMenu.Username, "1.1");
+        }
+        if (database.get_result(NavMenu.Username, "1.2")["SESSION"] != "NO DATA")
+        {
+            r1_2 = database.get_result(NavMenu.Username, "1.2");
+        }
+        if (database.get_result(NavMenu.Username, "2.1")["SESSION"] != "NO DATA")
+        {
+            r2_1 = database.get_result(NavMenu.Username, "2.1");
+        }
+        if (database.get_result(NavMenu.Username, "2.2")["SESSION"] != "NO DATA")
+        {
+            r2_2 = database.get_result(NavMenu.Username, "2.2");
+        }
+        if (database.get_result(NavMenu.Username, "3.1")["SESSION"] != "NO DATA")
+        {
+            r3_1 = database.get_result(NavMenu.Username, "3.1");
+        }
+        if (database.get_result(NavMenu.Username, "3.2")["SESSION"] != "NO DATA")
+        {
+            r3_2 = database.get_result(NavMenu.Username, "3.2");
+        }
+        if (database.get_result(NavMenu.Username, "4.1")["SESSION"] != "NO DATA")
+        {
+            r4_1 = database.get_result(NavMenu.Username, "4.1");
+        }
+        if (database.get_result(NavMenu.Username, "4.2")["SESSION"] != "NO DATA")
+        {
+            r4_2 = database.get_result(NavMenu.Username, "4.2");
+        }
+
+
+    }
+}

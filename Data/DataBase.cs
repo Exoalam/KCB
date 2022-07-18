@@ -8,15 +8,15 @@ namespace KCB.Data
         MongoClient dbClient = new MongoClient("mongodb+srv://nafiul005:nafiul005@database.tthhr5l.mongodb.net/?retryWrites=true&w=majority");
         public string check_acc(string email, string password)
         {
-   
+
             var database = dbClient.GetDatabase("Users");
             var collection = database.GetCollection<BsonDocument>("UserLogin");
             var documents = collection.Find(new BsonDocument()).ToList();
             foreach (BsonDocument doc in documents)
             {
-                if(email == doc["email"])
+                if (email == doc["email"])
                 {
-                    if(password == doc["password"])
+                    if (password == doc["password"])
                     {
 
                         return doc["user"].ToString();
@@ -24,7 +24,7 @@ namespace KCB.Data
                 }
             }
             return "W";
-            
+
         }
         public string create_acc(string user, string email, string password)
         {
@@ -67,7 +67,7 @@ namespace KCB.Data
         {
             var database = dbClient.GetDatabase("Transaction");
             var collection = database.GetCollection<BsonDocument>("transaction_history");
-            var document = new BsonDocument { { "user", user}, { "t_id", get_tid() }, { "type", paytype }, { "t_acc", account }, { "amount", int.Parse(amount) }, { "fee_type", feetype} };
+            var document = new BsonDocument { { "user", user }, { "t_id", get_tid() }, { "type", paytype }, { "t_acc", account }, { "amount", int.Parse(amount) }, { "fee_type", feetype } };
             collection.InsertOne(document);
         }
 
@@ -84,5 +84,38 @@ namespace KCB.Data
             return img;
         }
 
+        public BsonDocument get_result(string user, string session)
+        {
+            var database = dbClient.GetDatabase("Academic_Record");
+            var collection = database.GetCollection<BsonDocument>("Results");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                if (doc["user"] == user)
+                {
+                    try
+                    {
+                        if (doc[session] != null)
+                        {
+                            return doc[session].ToBsonDocument();
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+
+                }
+            }
+            var result = new BsonDocument { { "SESSION", "NO DATA" } };
+            return result;
+        }
+        public BsonDocument grade()
+        {
+            var database = dbClient.GetDatabase("Academic_Record");
+            var collection = database.GetCollection<BsonDocument>("GRADE");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            return documents[0].ToBsonDocument();
+        }
     }
 }

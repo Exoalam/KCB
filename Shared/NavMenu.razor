@@ -12,7 +12,7 @@
         <button class="nav_but" @onclick="Home_page">Home</button>
         <button class="nav_but">Facilities</button>
         <button class="nav_but">Research</button>
-        <button class="nav_but">Result</button>
+        <button class="nav_but" @onclick="Result_page">Result</button>
         <button class="nav_but">Notice</button>
         <button class="nav_but">Academic</button>
         <div class="dropdown">
@@ -40,7 +40,7 @@
 @code {
     public static bool loginrender = false;
     private bool collapseNavMenu = true;
-    string Username = "Login";
+    public static string Username = "Login";
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -52,6 +52,18 @@
     private void Login_page()
     {
         UriHelper.NavigateTo("Login");
+    }
+
+    private void Result_page()
+    {
+        if (loginrender)
+        {
+            UriHelper.NavigateTo("Result");
+        }
+        else
+        {
+            UriHelper.NavigateTo("NeedLogin");
+        }
     }
 
     private void PayFee_page()
