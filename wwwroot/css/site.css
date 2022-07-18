@@ -1,4 +1,4 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -39,22 +39,24 @@ a, .btn-link {
     flex-direction: column;
 }
 
-#home_page_panel .hi1 {
-    padding: 1px 0 0 0;
-    animation-name: a1;
-    animation-duration: 2s;
-    width: 94%;
-    box-shadow: 0px 0px 5px 1px black;
-}
+    #home_page_panel .hi1 {
+        padding: 1px 0 0 0;
+        animation-name: a1;
+        animation-duration: 2s;
+        width: 94%;
+        box-shadow: 0px 0px 5px 1px black;
+    }
 
 
 @keyframes a1 {
     0% {
         opacity: 0%;
     }
+
     50% {
         opacity: 50%;
     }
+
     100% {
         opacity: 100%;
     }
@@ -62,7 +64,7 @@ a, .btn-link {
 
 #Login_Design {
     width: 100%;
-    border-radius:10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
 }
 
 
@@ -102,14 +104,14 @@ a, .btn-link {
     font-weight: bold;
 }
 
-#Login_btn:hover {
-    box-shadow: 0px 0px 5px 1px black;
-}
+    #Login_btn:hover {
+        box-shadow: 0px 0px 5px 1px black;
+    }
 
-#Login_btn:hover:active {
-    background-image: none;
-    background-color: #93ff95;
-}
+        #Login_btn:hover:active {
+            background-image: none;
+            background-color: #93ff95;
+        }
 
 #Username_in {
     background-color: #cbcbcb;
@@ -160,10 +162,10 @@ a, .btn-link {
     background-position: 10px 10px;
 }
 
-    #Username_R:focus {
-        outline: none;
-        background-color: #bcffc6;
-    }
+#Username_R:focus {
+    outline: none;
+    background-color: #bcffc6;
+}
 
 #Password_in {
     background-color: #cbcbcb;
@@ -202,16 +204,17 @@ a, .btn-link {
     }
 
 
-    .vertical_table {
-        display: flex;
-        flex-direction: column;
-    }
+.vertical_table {
+    display: flex;
+    flex-direction: column;
+}
 
-    .horizontal_table {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
+.horizontal_table {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
 .elements {
     height: 400px;
     width: 300px;
@@ -219,12 +222,15 @@ a, .btn-link {
     margin: 5px;
     background-color: #fafafab1;
 }
+
     .elements:hover {
         box-shadow: 0px 0px 5px 1px black;
     }
-    .elements:hover:active {
-        box-shadow: none;
-    }
+
+        .elements:hover:active {
+            box-shadow: none;
+        }
+
     .elements img {
         height: 200px;
         width: 200px;
@@ -244,6 +250,8 @@ a, .btn-link {
     border-radius: 10px;
 }
 
+
+
 #Pay_Nav_Panel {
     display: flex;
     flex-direction: column;
@@ -261,7 +269,6 @@ a, .btn-link {
         border-radius: 10px;
         box-shadow: 0px 0px 5px 1px black;
         font-weight: bold;
-        
     }
 
         #Pay_Nav_Panel button:hover {
@@ -307,6 +314,7 @@ a, .btn-link {
     font-size: 20px;
     margin: 5px;
 }
+
 #course_reg_form button {
     box-shadow: none;
     border: none;
@@ -328,6 +336,7 @@ a, .btn-link {
         #course_reg_form button:hover:active {
             background-color: #31ff42;
         }
+
 #payment button {
     box-shadow: none;
     border: none;
@@ -341,13 +350,14 @@ a, .btn-link {
     font-weight: bold;
     width: 250px;
 }
-#payment button:hover {
-    background-color: #87ff79;
-}
 
-    #payment button:hover:active {
-        background-color: #31ff42;
+    #payment button:hover {
+        background-color: #87ff79;
     }
+
+        #payment button:hover:active {
+            background-color: #31ff42;
+        }
 
 #bk_payment input {
     font-size: 20px;
@@ -425,3 +435,37 @@ a, .btn-link {
         #Hall_fee_form button:hover:active {
             background-color: #31ff42;
         }
+
+#needlogin_panel {
+    margin: 50px auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+    background-color: #c6c6c69e;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 10px;
+}
+
+    #needlogin_panel button {
+        box-shadow: none;
+        border: none;
+        padding: 0px 50px 0 50px;
+        margin: auto;
+        background-color: #c6c6c69e;
+        text-align: center;
+        height: 50px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px 1px black;
+        font-weight: bold;
+        width: 200px;
+    }
+
+        #needlogin_panel button:hover {
+            background-color: #87ff79;
+        }
+
+            #needlogin_panel button:hover:active {
+                background-color: #31ff42;
+            }

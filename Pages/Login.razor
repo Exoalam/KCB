@@ -63,7 +63,7 @@
                     await BrowserStorage.SetAsync("name", username);
                     NavMenu.loginrender = true;
                     _navigationManager.NavigateTo("/", true);
-                    
+
                 }
             }
         }
@@ -96,7 +96,13 @@
             else
             {
                 status = "";
-                database.create_acc(Ruser, Remail, Rpassword);
+                status = database.create_acc(Ruser, Remail, Rpassword);
+                if (status == "Account created")
+                {
+                    await BrowserStorage.SetAsync("name", Ruser);
+                    NavMenu.loginrender = true;
+                    _navigationManager.NavigateTo("/", true);
+                }
             }
         }
         else

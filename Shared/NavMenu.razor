@@ -47,7 +47,15 @@
 
     private void PayFee_page()
     {
-        UriHelper.NavigateTo("PayFee");
+        if (loginrender)
+        {
+            UriHelper.NavigateTo("PayFee");
+        }
+        else
+        {
+            UriHelper.NavigateTo("NeedLogin");
+        }
+
     }
 
     private async void Home_page()

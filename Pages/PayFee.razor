@@ -1,7 +1,11 @@
 ﻿@page "/PayFee"
 @using System.IO
 @using iText
+@using KCB.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage BrowserStorage
 @inject IJSRuntime JsRuntime;
+@inject DataBase database
 @implements IDisposable
 
 <div id="PayFee_Panel">
@@ -297,6 +301,7 @@
                     <input type="number" value="@amount" />
                 </div>
             </div>
+            <p style="color:red; font-size: 20px">@warning</p>
             <button @onclick="done_payment">Process Payment</button>
         </div>
         <div id="done_payment" style="display:@done_visibility; height: 100%; width:100%;flex-direction:column">
@@ -305,6 +310,7 @@
                 <p style="font-size: 36px; font-weight: bold; margin-top: 30px;">Payment Complete</p>
             </div>
             <a href="/receipt.pdf" download>Download Receipt</a>
+      
         </div>
     </div>
 </div>
@@ -347,6 +353,8 @@
     string mobile = "";
     int total = 0;
     string amount = "";
+    string warning = "";
+    string feetype = "";
 
     public void course_reg()
     {
@@ -358,6 +366,7 @@
         payment_visibility = "none";
         bkash_visibility = "none";
         done_visibility = "none";
+        feetype = "";
     }
 
     public void hall_fee()
@@ -370,6 +379,7 @@
         payment_visibility = "none";
         bkash_visibility = "none";
         done_visibility = "none";
+        feetype = "";
     }
 
     public void library_fee()
@@ -382,6 +392,7 @@
         payment_visibility = "none";
         bkash_visibility = "none";
         done_visibility = "none";
+        feetype = "";
     }
 
     public void utility_fee()
@@ -394,6 +405,7 @@
         payment_visibility = "none";
         bkash_visibility = "none";
         done_visibility = "none";
+        feetype = "";
     }
 
     protected async Task payment()
@@ -402,21 +414,25 @@
         {
             total = int.Parse(hf0) + int.Parse(hf1) + int.Parse(hf2) + int.Parse(hf3) + int.Parse(hf4) + int.Parse(hf5) + int.Parse(hf6) + int.Parse(hf7) + int.Parse(hf8) + int.Parse(hf9) + int.Parse(hf10);
             await JsRuntime.InvokeAsync<object>("WriteCookie.WriteCookie", "total", total.ToString(), DateTime.Now.AddMinutes(1));
+            feetype = "Hall Fee";
         }
         else if (hall_visibility == "none" && library_visibility == "none" && utility_visibility == "none")
         {
             total = int.Parse(cr0) + int.Parse(cr1) + int.Parse(cr2) + int.Parse(cr3) + int.Parse(cr4) + int.Parse(cr5) + int.Parse(cr6);
             await JsRuntime.InvokeAsync<object>("WriteCookie.WriteCookie", "total", total.ToString(), DateTime.Now.AddMinutes(1));
+            feetype = "Course Fee";
         }
         else if (course_visibility == "none" && hall_visibility == "none" && utility_visibility == "none")
         {
             total = int.Parse(lf0) + int.Parse(lf1);
             await JsRuntime.InvokeAsync<object>("WriteCookie.WriteCookie", "total", total.ToString(), DateTime.Now.AddMinutes(1));
+            feetype = "Library Fee";
         }
         else if (course_visibility == "none" && hall_visibility == "none" && library_visibility == "none")
         {
             total = int.Parse(uf0) + int.Parse(uf1) + int.Parse(uf2) + int.Parse(uf3);
             await JsRuntime.InvokeAsync<object>("WriteCookie.WriteCookie", "total", total.ToString(), DateTime.Now.AddMinutes(1));
+            feetype = "Utility";
         }
         default_visibility = "none";
         course_visibility = "none";
@@ -430,6 +446,7 @@
 
     protected async Task bkash_payment()
     {
+
         amount = await JsRuntime.InvokeAsync<string>("ReadCookie.ReadCookie", "total");
         default_visibility = "none";
         course_visibility = "none";
@@ -439,19 +456,34 @@
         payment_visibility = "none";
         bkash_visibility = "flex";
         done_visibility = "none";
+        warning = "";
     }
 
-    public void done_payment()
+    public async Task done_payment()
     {
-        pdf_maker();
-        default_visibility = "none";
-        course_visibility = "none";
-        hall_visibility = "none";
-        library_visibility = "none";
-        utility_visibility = "none";
-        payment_visibility = "none";
-        bkash_visibility = "none";
-        done_visibility = "flex";
+        if (bkash_visibility != "none")
+        {
+            if (mobile != "" && mobile.Length == 11)
+            {
+                pdf_maker();
+                default_visibility = "none";
+                course_visibility = "none";
+                hall_visibility = "none";
+                library_visibility = "none";
+                utility_visibility = "none";
+                payment_visibility = "none";
+                bkash_visibility = "none";
+                done_visibility = "flex";
+                var result = await BrowserStorage.GetAsync<string>("name");
+                string Username = result.Value.ToString();
+                database.add_transaction(Username, "BKash", mobile, amount, feetype);
+            }
+
+            else
+            {
+                warning = "Invalid mobile number";
+            }
+        }
     }
 
     public async void pdf_maker()

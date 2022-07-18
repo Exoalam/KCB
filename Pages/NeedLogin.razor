@@ -1,0 +1,16 @@
+﻿@page "/NeedLogin"
+@inject NavigationManager UriHelper
+
+<div id="needlogin_panel" style="display:flex; flex-direction: column">
+    <div style="margin:auto; display:flex; flex-direction: row">
+        <img src="/Images/anxiety.png" style="height: 200px; width: 200px; margin: 20px;" />
+        <p style="font-size: 32px; font-weight: bold; margin: auto">Please Login or Create Account</p>
+    </div>
+    <button @onclick="loginPage">Login/Create Account</button>
+</div>
+@code {
+    private void loginPage()
+    {
+        UriHelper.NavigateTo("Login");
+    }
+}
