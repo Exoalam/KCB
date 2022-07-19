@@ -2,7 +2,7 @@
 #bimage {
     height: 100%;
     width: 100%;
-    filter: blur(4px);
+    filter: brightness(.7);
     z-index: -1;
     position: fixed;
 }

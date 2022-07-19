@@ -10,7 +10,7 @@
     </div>
     <div id="navigation">
         <button class="nav_but" @onclick="Home_page">Home</button>
-        <button class="nav_but">Facilities</button>
+        <button class="nav_but" @onclick="Facilities_page">Facilities</button>
         <button class="nav_but">Research</button>
         <button class="nav_but" @onclick="Result_page">Result</button>
         <button class="nav_but">Notice</button>
@@ -82,6 +82,11 @@
     private async void Home_page()
     {
         UriHelper.NavigateTo("/");
+    }
+
+    private async void Facilities_page()
+    {
+        UriHelper.NavigateTo("Facilities");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
