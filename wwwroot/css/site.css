@@ -484,13 +484,52 @@ a, .btn-link {
 }
 
 .facilities {
-    margin: 5px auto;
+    margin: auto;
     width: 94%;
     display: flex;
     flex-direction: row;
     min-height: 700px;
     background-color: #c6c6c6e2;
     text-align: center;
+    border-radius: 2px;
+}
+
+.research {
+    margin: auto;
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    background-color: #c6c6c6e2;
+    text-align: center;
     box-shadow: 0px 0px 5px 1px black;
     border-radius: 5px;
+    background-color: black
 }
+#mnv_bg {
+    height: 700px;
+    background-image: url("../Images/b.png");
+    background-size: 100%;
+}
+
+.syllabus {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 98%;
+}
+
+    .syllabus td, .syllabus th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .syllabus tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .syllabus th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }

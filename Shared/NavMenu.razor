@@ -11,10 +11,32 @@
     <div id="navigation">
         <button class="nav_but" @onclick="Home_page">Home</button>
         <button class="nav_but" @onclick="Facilities_page">Facilities</button>
-        <button class="nav_but">Research</button>
+        <div class="dropdown">
+            <button class="nav_but">Research</button>
+            <div class="dropdown-content">
+                <a href="Researchfield">Research Field</a>
+                <a href="Publication">Publication</a>
+            </div>
+        </div>
         <button class="nav_but" @onclick="Result_page">Result</button>
         <button class="nav_but">Notice</button>
-        <button class="nav_but">Academic</button>
+        <div class="dropdown">
+            <button class="nav_but">Academic</button>
+            <div class="dropdown-content">
+                <a href="#">Academic Program</a>
+                <a href="Syllabus">Syllabus</a>
+                <a href="#">Academic Calendar</a>
+                <a href="#">Academic Program</a>
+                <a href="#">Class Routine</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="nav_but">About</button>
+            <div class="dropdown-content">
+                <a href="mnv">Mission and Vision</a>
+                <a href="/info_booklet_3rd_ed_KUET_CSE.pdf">Information Booklet</a>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="nav_but">People</button>
             <div class="dropdown-content">
@@ -24,7 +46,13 @@
         </div>
         <button class="nav_but" @onclick="PayFee_page">PayFee</button>
         <button class="nav_but" onclick="location.href='http://www.kuet.ac.bd/'">KUET</button>
-        <button class="nav_but">About</button>
+        <div class="dropdown">
+            <button class="nav_but">About</button>
+            <div class="dropdown-content">
+                <a href="mnv">Mission and Vision</a>
+                <a href="/info_booklet_3rd_ed_KUET_CSE.pdf">Information Booklet</a>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="nav_but" @onclick="Login_page">@Username</button>
             @if (loginrender)

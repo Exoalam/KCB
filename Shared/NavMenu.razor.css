@@ -49,6 +49,7 @@
     background-color: white;
     text-align: center;
     height: 50px;
+    overflow: hidden;
 }
 
 .nav_but:hover {
