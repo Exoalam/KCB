@@ -16,25 +16,31 @@
             <button style="@design3" class="Notice_Nav_Panelb" @onclick="ga_btn">Graduate Academic</button>
             <button style="@design4" class="Notice_Nav_Panelb" @onclick="event_btn">Event</button>
             <button style="@design5" class="Notice_Nav_Panelb" @onclick="adm_btn">Admission</button>
-            <div style="background-color: #c6c6c69e; overflow: auto">
-                <p style="font-size: 30px; margin: auto;">Upload</p>
-                <input id="Username_in" placeholder="type your Notice" style="background-image: none; width: 100%;" @bind="notice_data" type="text" /><br />
-                <SfUploader ID="UploadFiles" AutoUpload="false">
-                    <UploaderEvents ValueChange="OnChange"></UploaderEvents>
-                </SfUploader>
-                <button class="Notice_Nav_Panelb" @onclick="done">Done</button>
-            </div>
-        </div>
-        <div class="Notice_Display_Panel">
-            <br />
-            @for (var i = 0; i < data.Count; i++)
+            @if (NavMenu.adminpermission)
             {
-                <div class="nfile" style="display: flex; flex-direction: row; text-align: left;border-bottom: 1px solid black; margin: 5px;">
-                    <img src="/Images/Delete.png" />
-                    <a href="..@fdata[i]" style="font-size:24px; margin: auto;">@data[i]</a>
+                <div style="background-color: #c6c6c69e; overflow: auto">
+                    <p style="font-size: 30px; margin: auto;">Upload</p>
+                    <input id="Username_in" placeholder="type your Notice" style="background-image: none; width: 100%;" @bind="notice_data" type="text" /><br />
+                    <SfUploader ID="UploadFiles" AutoUpload="false">
+                        <UploaderEvents ValueChange="OnChange"></UploaderEvents>
+                    </SfUploader>
+                    <div style="display: flex; flex-direction: row">
+                        <button class="Notice_Nav_Panelb" @onclick="delete_notice" style="color: red;">Delete</button>
+                        <button class="Notice_Nav_Panelb" @onclick="done">Done</button>
+                    </div>
+
                 </div>
             }
         </div>
+        <select @ondblclick="ddone" @bind="ddata" class="Notice_Display_Panel" size=1000>
+            <br />
+            @for (var i = 0; i < data.Count; i++)
+            {
+                <option class="nfile" style="display: flex; flex-direction: row; text-align: left;border-bottom: 1px solid black; margin: 5px; font-size: 24px;">
+                    <label>@data[i]</label>
+                </option>
+            }
+        </select>
     </div>
 
 </div>
@@ -59,6 +65,7 @@
     string design5;
     string pathx;
     string notice_data;
+    string ddata;
 
     protected override void OnInitialized()
     {
@@ -81,13 +88,14 @@
         foreach (var file in args.Files)
         {
             path = pathx + file.FileInfo.Name;
-            FileStream filestream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            FileStream filestream = new FileStream("wwwroot/" + path, FileMode.Create, FileAccess.Write);
             file.Stream.WriteTo(filestream);
             filestream.Close();
             file.Stream.Close();
         }
         if (design1 != "")
         {
+
             database.creat_notice(notice_data, path, "exam");
         }
         else if (design2 != "")
@@ -113,6 +121,66 @@
     {
         _navigationManager.NavigateTo("/Notice", true);
     }
+
+    private void ddone()
+    {
+        string ffdate = "";
+        if (design1 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (examlist[i].ToString() == ddata)
+                {
+                    ffdate = fexamlist[i].ToString();
+                }
+            }
+            _navigationManager.NavigateTo(ffdate, true);
+        }
+        else if (design2 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (ualist[i].ToString() == ddata)
+                {
+                    ffdate = fualist[i].ToString();
+                }
+            }
+            _navigationManager.NavigateTo(ffdate, true);
+        }
+        else if (design3 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (galist[i].ToString() == ddata)
+                {
+                    ffdate = fgalist[i].ToString();
+                }
+            }
+            _navigationManager.NavigateTo(ffdate, true);
+        }
+        else if (design4 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (eventlist[i].ToString() == ddata)
+                {
+                    ffdate = feventlist[i].ToString();
+                }
+            }
+            _navigationManager.NavigateTo(ffdate, true);
+        }
+        else if (design5 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (admlist[i].ToString() == ddata)
+                {
+                    ffdate = fadmlist[i].ToString();
+                }
+            }
+            _navigationManager.NavigateTo(ffdate, true);
+        }
+    }
     private void exam_btn()
     {
         data = examlist;
@@ -122,7 +190,7 @@
         design3 = "";
         design4 = "";
         design5 = "";
-        pathx = "Data/Notices/exam/";
+        pathx = "Notices/exam/";
     }
 
     private void ua_btn()
@@ -134,7 +202,7 @@
         design3 = "";
         design4 = "";
         design5 = "";
-        pathx = "Data/Notices/ua/";
+        pathx = "Notices/ua/";
     }
 
     private void ga_btn()
@@ -146,7 +214,7 @@
         design2 = "";
         design4 = "";
         design5 = "";
-        pathx = "Data/Notices/ga/";
+        pathx = "Notices/ga/";
     }
 
     private void event_btn()
@@ -158,7 +226,7 @@
         design2 = "";
         design3 = "";
         design5 = "";
-        pathx = "Data/Notices/event/";
+        pathx = "Notices/event/";
     }
 
     private void adm_btn()
@@ -170,12 +238,74 @@
         design2 = "";
         design3 = "";
         design4 = "";
-        pathx = "Data/Notices/adm/";
+        pathx = "Notices/adm/";
     }
 
     private void delete_notice()
     {
-        File.Delete("wwwroot/receipt.pdf");
+        string name = ddata;
+        string ffdate = "";
+        if (design1 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (examlist[i].ToString() == ddata)
+                {
+                    ffdate = fexamlist[i].ToString();
+                }
+            }
+            database.delete_notice(name, "exam");
+            File.Delete("wwwroot/" + ffdate);
+        }
+        else if (design2 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (ualist[i].ToString() == ddata)
+                {
+                    ffdate = fualist[i].ToString();
+                }
+            }
+            database.delete_notice(name, "ua");
+            File.Delete("wwwroot/" + ffdate);
+        }
+        else if (design3 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (galist[i].ToString() == ddata)
+                {
+                    ffdate = galist[i].ToString();
+                }
+            }
+            database.delete_notice(name, "ga");
+            File.Delete("wwwroot/" + ffdate);
+        }
+        else if (design4 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (eventlist[i].ToString() == ddata)
+                {
+                    ffdate = feventlist[i].ToString();
+                }
+            }
+            database.delete_notice(name, "event");
+            File.Delete("wwwroot/" + ffdate);
+        }
+        else if (design5 != "")
+        {
+            for (var i = 0; i < examlist.Count; i++)
+            {
+                if (admlist[i].ToString() == ddata)
+                {
+                    ffdate = fadmlist[i].ToString();
+                }
+            }
+            database.delete_notice(name, "adm");
+            File.Delete("wwwroot/" + ffdate);
+        }
+        _navigationManager.NavigateTo("/Notice", true);
     }
-    
+
 }

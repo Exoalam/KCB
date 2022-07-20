@@ -611,6 +611,7 @@ a, .btn-link {
     flex-direction: column;
     background-color: #c6c6c69e;
     border-right: 1px solid black;
+
 }
 
     .Notice_Nav_Panelb {
@@ -633,7 +634,7 @@ a, .btn-link {
 
 .Notice_Display_Panel {
     border-radius: 2px;
-    height: 100%;
+    height: 640px;
     width: 100%;
     padding: 10px;
     overflow: auto;

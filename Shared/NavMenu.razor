@@ -59,6 +59,7 @@
 </div>
 @code {
     public static bool loginrender = false;
+    public static bool adminpermission = false;
     private bool collapseNavMenu = true;
     public static string Username = "Login";
 
@@ -131,7 +132,10 @@
     {
         var result = await BrowserStorage.GetAsync<string>("name");
         Username = result.Value.ToString();
-
+        if (Username == "0000000")
+        {
+            adminpermission = true;
+        }
     }
 
     private async Task Logout()
@@ -139,6 +143,7 @@
         await BrowserStorage.SetAsync("name", "");
         Username = "Login";
         loginrender = false;
+        adminpermission = false;
         _navigationManager.NavigateTo("/", true);
 
     }

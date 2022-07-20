@@ -31,11 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Notices\exam\" />
-    <Folder Include="Data\Notices\ga\" />
-    <Folder Include="Data\Notices\event\" />
-    <Folder Include="Data\Notices\adm\" />
-    <Folder Include="Data\Notices\ua\" />
+    <Folder Include="wwwroot\Notices\ga\" />
+    <Folder Include="wwwroot\Notices\event\" />
+    <Folder Include="wwwroot\Notices\adm\" />
+    <Folder Include="wwwroot\Notices\ua\" />
   </ItemGroup>
 
 </Project>
