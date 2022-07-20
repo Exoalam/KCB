@@ -156,6 +156,30 @@ namespace KCB.Data
             }
             return arlist;
         }
+
+        public BsonDocument get_due(string user)
+        {
+            var database = dbClient.GetDatabase("Users");
+            var collection = database.GetCollection<BsonDocument>("UserLogin");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                if (doc["user"] == user)
+                {
+                    return doc;
+                }
+            }
+            var result = new BsonDocument { { "SESSION", "NO DATA" } };
+            return result;
+        }
+
+        public List<BsonDocument> get_hostory()
+        {
+            var database = dbClient.GetDatabase("Transaction");
+            var collection = database.GetCollection<BsonDocument>("transaction_history");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            return documents;
+        }
     }
 
 }

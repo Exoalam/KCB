@@ -1,0 +1,95 @@
+﻿@page "/Profile"
+
+@using KCB.Data
+@using MongoDB.Bson
+@inject DataBase database
+
+<div class="common_panel" style="background-color: #c6c6c69e; height:700px; width: 60%; margin: 20px auto; flex-direction: column">
+    @if (!NavMenu.adminpermission)
+    {
+        <div style="margin: 50px auto">
+            <img style="width: 250px;height: 250px;" src="/Images/profile.png" />
+        </div>
+        <label style="font-size:36px;font-weight:bold">Details</label>
+        <div style="margin: auto; display: flex; flex-direction:row">
+            <div style="margin: 50px">
+                <label style="font-size:20px;font-weight:bold;">UserID:</label>
+                <p style="font-size:20px;">@NavMenu.Username</p>
+            </div>
+            <div style="margin: 50px">
+                <label style="font-size:20px;font-weight:bold">Course Due:</label>
+                <p style="font-size:20px; color: red">TK @data["cd"].ToString()</p>
+            </div>
+            <div style="margin: 50px">
+                <label style="font-size:20px;font-weight:bold">Hall Due:</label>
+                <p style="font-size:20px; color: red">TK @data["hd"].ToString()</p>
+            </div>
+            <div style="margin: 50px">
+                <label style="font-size:20px;font-weight:bold">Library Due:</label>
+                <p style="font-size:20px; color: red">TK @data["ld"].ToString()</p>
+            </div>
+            <div style="margin: 50px">
+                <label style="font-size:20px;font-weight:bold">Utility Due:</label>
+                <p style="font-size:20px; color: red">TK @data["ud"].ToString()</p>
+            </div>
+        </div>
+    }
+    @if (NavMenu.adminpermission)
+    {
+        <div style="display: flex; flex-direction: row">
+            <div style="display: flex; flex-direction: column; margin: auto">
+                <select id="Username_in" size=1000 style="height: 400px; width: 500px; background-image: none;">
+                </select>
+                <div style="display: flex; flex-direction:column">
+                    <div style="display: flex; flex-direction:row">
+                        <div style="display: flex; flex-direction:column; margin: 10px">
+                            <p style="font-size: 16px;font-weight:bold">Course Due</p>
+                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                        </div>
+                        <div style="display: flex; flex-direction:column; margin: 10px">
+                            <p style="font-size: 16px;font-weight:bold">Hall Due</p>
+                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                        </div>
+                    </div>
+                     <div style="display: flex; flex-direction:row">
+                        <div style="display: flex; flex-direction:column;margin: 10px">
+                            <p style="font-size: 16px;font-weight:bold">Library Due</p>
+                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                        </div>
+                        <div style="display: flex; flex-direction:column; margin: 10px">
+                            <p style="font-size: 16px;font-weight:bold">Utility Due</p>
+                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <button class="Notice_Nav_Panelb">Update</button>
+            </div>
+            <div style="display: flex; flex-direction: column; overflow: auto; height: 700px;">
+                @foreach (var doc in listdata)
+                {
+                    <div style="display:flex; flex-direction:column; border: 1px solid black; margin: 20px;">
+                        <div style="display:flex; flex-direction: row">
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["user"]</p>
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["t_id"]</p>
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["type"]</p>
+                        </div>
+                        <div style="display:flex; flex-direction: row">
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["t_acc"]</p>
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["amount"]</p>
+                            <p style="margin: 10px; font-size: 16px;font-weight:bold">@doc["fee_type"]</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+@code {
+    BsonDocument data = new BsonDocument { };
+    List<BsonDocument> listdata = new List<BsonDocument>();
+    protected override void OnInitialized()
+    {
+        data = database.get_due(NavMenu.Username);
+        listdata = database.get_hostory();
+    }
+}
