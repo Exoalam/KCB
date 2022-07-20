@@ -1,37 +1,71 @@
 ﻿@page "/Notice"
+@using KCB.Data
+@using System.Collections;
+@inject DataBase database
 
 <div class="Notice_Panel" style="flex-direction:column">
     <div style="width: 100%; height: 10%; background-color: #44a16d;"><p style="font-size: 36px; font-weight: bold; margin: auto;">Notices</p></div>
     <div class="Notice_Panel" style="flex-direction:row; width: 100%;box-shadow: none; border-radius: 2px; margin: unset">
         <div id="Notice_Nav_Panel">
-            <button>Exam</button>
-            <button>Undergraduate Academic</button>
-            <button>Graduate Academic</button>
-            <button>Event</button>
-            <button>Admission</button>
+            <button @onclick="exam_btn">Exam</button>
+            <button @onclick="ua_btn">Undergraduate Academic</button>
+            <button @onclick="ga_btn">Graduate Academic</button>
+            <button @onclick="event_btn">Event</button>
+            <button @onclick="adm_btn">Admission</button>
         </div>
-        <div class="Notice_Display_Panel" style="display: @exam_visibility">
+        <div class="Notice_Display_Panel">
             <br />
-            @for (var i = 0; i < 10; i++)
+            @foreach (var item in data)
             {
                 <div class="nfile" style="display: flex; flex-direction: row; text-align: left;border-bottom: 1px solid black; margin: 5px;">
                     <img src="/Images/Delete.png" />
-                    <a style="font-size:24px; margin: auto;">Contenssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssst</a>
-
+                    <a style="font-size:24px; margin: auto;">@item</a>
                 </div>
             }
         </div>
-        <div style="display: @ua_visibility"></div>
-        <div style="display: @ga_visibility"></div>
-        <div style="display: @event_visibility"></div>
-        <div style="display: @admission_visibility"></div>
     </div>
 </div>
 
 @code {
-    public string exam_visibility = "flex";
-    public string ua_visibility = "none";
-    public string ga_visibility = "none";
-    public string event_visibility = "none";
-    public string admission_visibility = "none";
+    ArrayList examlist = new ArrayList();
+    ArrayList ualist = new ArrayList();
+    ArrayList galist = new ArrayList();
+    ArrayList eventlist = new ArrayList();
+    ArrayList admlist = new ArrayList();
+    ArrayList data = new ArrayList();
+
+    protected override void OnInitialized()
+    {
+        examlist = database.get_notice("exam");
+        ualist = database.get_notice("ua");
+        galist = database.get_notice("ga");
+        eventlist = database.get_notice("event");
+        admlist = database.get_notice("adm");
+        exam_btn();
+    }
+
+    private void exam_btn()
+    {
+        data = examlist;
+    }
+
+    private void ua_btn()
+    {
+        data = ualist;
+    }
+
+    private void ga_btn()
+    {
+        data = galist;
+    }
+
+    private void event_btn()
+    {
+        data = eventlist;
+    }
+
+    private void adm_btn()
+    {
+        data = admlist;
+    }
 }

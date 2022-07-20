@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections;
 
 namespace KCB.Data
 {
@@ -117,5 +118,18 @@ namespace KCB.Data
             var documents = collection.Find(new BsonDocument()).ToList();
             return documents[0].ToBsonDocument();
         }
+        public ArrayList get_notice(string type)
+        {
+            var arlist = new ArrayList();
+            var database = dbClient.GetDatabase("Notice");
+            var collection = database.GetCollection<BsonDocument>(type);
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                arlist.Add(doc["name"].ToString());
+            }
+            return arlist;
+        }
     }
+
 }
