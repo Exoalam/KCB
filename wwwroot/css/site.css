@@ -494,6 +494,42 @@ a, .btn-link {
     border-radius: 2px;
 }
 
+.common_panel {
+    margin: auto;
+    width: 94%;
+    min-height: 700px;
+    display: flex;
+    flex-direction: row;
+    background-color: #c6c6c6e2;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 5px;
+}
+
+.common_panele {
+    margin: 170px auto;
+    width: 12%;
+    display: flex;
+    flex-direction: column;
+    background-color: #c6c6c6e2;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+    .common_panele:hover {
+        margin: 150px auto;
+        width: 15%;
+        color: black;
+    }
+    .common_panele:hover:active {
+        margin: 170px auto;
+        width: 12%;
+        color: black;
+    }
+
 .research {
     margin: auto;
     width: 94%;
@@ -505,6 +541,7 @@ a, .btn-link {
     border-radius: 5px;
     background-color: black
 }
+
 #mnv_bg {
     height: 700px;
     background-image: url("../Images/b.png");
