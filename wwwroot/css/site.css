@@ -500,7 +500,6 @@ a, .btn-link {
     min-height: 700px;
     display: flex;
     flex-direction: row;
-    background-color: #c6c6c6e2;
     text-align: center;
     box-shadow: 0px 0px 5px 1px black;
     border-radius: 5px;
@@ -508,28 +507,50 @@ a, .btn-link {
 
 .common_panele {
     margin: 170px auto;
-    width: 12%;
+    width: 15%;
     display: flex;
     flex-direction: column;
-    background-color: #c6c6c6e2;
+    background-color: #67676797;
     text-align: center;
     box-shadow: 0px 0px 5px 1px black;
     border-radius: 5px;
+    padding: 70px;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
     .common_panele:hover {
         margin: 150px auto;
-        width: 15%;
-        color: black;
+        color: white;
     }
-    .common_panele:hover:active {
-        margin: 170px auto;
-        width: 12%;
-        color: black;
+        .common_panele:hover:active {
+            margin: 170px auto;
+            color: white;
+        }
+
+.common_panela {
+    margin: 100px auto;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: #67676797;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 5px;
+    padding: 70px;
+    text-decoration: none;
+    color: white;
+}
+
+    .common_panela:hover {
+        margin: 90px auto;
+        color: white;
     }
 
+        .common_panela:hover:active {
+            margin: 100px auto;
+            color: white;
+        }
 .research {
     margin: auto;
     width: 94%;
