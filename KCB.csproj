@@ -26,6 +26,16 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
+    <PackageReference Include="Syncfusion.Blazor" Version="20.2.0.39" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="20.2.0.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Notices\exam\" />
+    <Folder Include="Data\Notices\ga\" />
+    <Folder Include="Data\Notices\event\" />
+    <Folder Include="Data\Notices\adm\" />
+    <Folder Include="Data\Notices\ua\" />
   </ItemGroup>
 
 </Project>

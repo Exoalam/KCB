@@ -1,29 +1,42 @@
 ﻿@page "/Notice"
 @using KCB.Data
 @using System.Collections;
+@using Syncfusion.Blazor.Inputs
+@using System.IO
+@inject NavigationManager _navigationManager
 @inject DataBase database
 
 <div class="Notice_Panel" style="flex-direction:column">
     <div style="width: 100%; height: 10%; background-color: #44a16d;"><p style="font-size: 36px; font-weight: bold; margin: auto;">Notices</p></div>
+
     <div class="Notice_Panel" style="flex-direction:row; width: 100%;box-shadow: none; border-radius: 2px; margin: unset">
         <div id="Notice_Nav_Panel">
-            <button @onclick="exam_btn">Exam</button>
-            <button @onclick="ua_btn">Undergraduate Academic</button>
-            <button @onclick="ga_btn">Graduate Academic</button>
-            <button @onclick="event_btn">Event</button>
-            <button @onclick="adm_btn">Admission</button>
+            <button style="@design1" class="Notice_Nav_Panelb" @onclick="exam_btn">Exam</button>
+            <button style="@design2" class="Notice_Nav_Panelb" @onclick="ua_btn">Undergraduate Academic</button>
+            <button style="@design3" class="Notice_Nav_Panelb" @onclick="ga_btn">Graduate Academic</button>
+            <button style="@design4" class="Notice_Nav_Panelb" @onclick="event_btn">Event</button>
+            <button style="@design5" class="Notice_Nav_Panelb" @onclick="adm_btn">Admission</button>
+            <div style="background-color: #c6c6c69e; overflow: auto">
+                <p style="font-size: 30px; margin: auto;">Upload</p>
+                <input id="Username_in" placeholder="type your Notice" style="background-image: none; width: 100%;" @bind="notice_data" type="text" /><br />
+                <SfUploader ID="UploadFiles" AutoUpload="false">
+                    <UploaderEvents ValueChange="OnChange"></UploaderEvents>
+                </SfUploader>
+                <button class="Notice_Nav_Panelb" @onclick="done">Done</button>
+            </div>
         </div>
         <div class="Notice_Display_Panel">
             <br />
-            @foreach (var item in data)
+            @for (var i = 0; i < data.Count; i++)
             {
                 <div class="nfile" style="display: flex; flex-direction: row; text-align: left;border-bottom: 1px solid black; margin: 5px;">
                     <img src="/Images/Delete.png" />
-                    <a style="font-size:24px; margin: auto;">@item</a>
+                    <a href="..@fdata[i]" style="font-size:24px; margin: auto;">@data[i]</a>
                 </div>
             }
         </div>
     </div>
+
 </div>
 
 @code {
@@ -33,6 +46,19 @@
     ArrayList eventlist = new ArrayList();
     ArrayList admlist = new ArrayList();
     ArrayList data = new ArrayList();
+    ArrayList fexamlist = new ArrayList();
+    ArrayList fualist = new ArrayList();
+    ArrayList fgalist = new ArrayList();
+    ArrayList feventlist = new ArrayList();
+    ArrayList fadmlist = new ArrayList();
+    ArrayList fdata = new ArrayList();
+    string design1;
+    string design2;
+    string design3;
+    string design4;
+    string design5;
+    string pathx;
+    string notice_data;
 
     protected override void OnInitialized()
     {
@@ -41,31 +67,115 @@
         galist = database.get_notice("ga");
         eventlist = database.get_notice("event");
         admlist = database.get_notice("adm");
+        fexamlist = database.get_noticef("exam");
+        fualist = database.get_noticef("ua");
+        fgalist = database.get_noticef("ga");
+        feventlist = database.get_noticef("event");
+        fadmlist = database.get_noticef("adm");
         exam_btn();
     }
 
+    public void OnChange(UploadChangeEventArgs args)
+    {
+        var path = "";
+        foreach (var file in args.Files)
+        {
+            path = pathx + file.FileInfo.Name;
+            FileStream filestream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            file.Stream.WriteTo(filestream);
+            filestream.Close();
+            file.Stream.Close();
+        }
+        if (design1 != "")
+        {
+            database.creat_notice(notice_data, path, "exam");
+        }
+        else if (design2 != "")
+        {
+            database.creat_notice(notice_data, path, "ua");
+        }
+        else if (design3 != "")
+        {
+            database.creat_notice(notice_data, path, "ga");
+        }
+        else if (design4 != "")
+        {
+            database.creat_notice(notice_data, path, "event");
+        }
+        else if (design5 != "")
+        {
+            database.creat_notice(notice_data, path, "adm");
+        }
+
+
+    }
+    private void done()
+    {
+        _navigationManager.NavigateTo("/Notice", true);
+    }
     private void exam_btn()
     {
         data = examlist;
+        fdata = fexamlist;
+        design1 = "background-color: #44a16d;";
+        design2 = "";
+        design3 = "";
+        design4 = "";
+        design5 = "";
+        pathx = "Data/Notices/exam/";
     }
 
     private void ua_btn()
     {
         data = ualist;
+        fdata = fualist;
+        design2 = "background-color: #44a16d;";
+        design1 = "";
+        design3 = "";
+        design4 = "";
+        design5 = "";
+        pathx = "Data/Notices/ua/";
     }
 
     private void ga_btn()
     {
         data = galist;
+        fdata = fgalist;
+        design3 = "background-color: #44a16d;";
+        design1 = "";
+        design2 = "";
+        design4 = "";
+        design5 = "";
+        pathx = "Data/Notices/ga/";
     }
 
     private void event_btn()
     {
         data = eventlist;
+        fdata = feventlist;
+        design4 = "background-color: #44a16d;";
+        design1 = "";
+        design2 = "";
+        design3 = "";
+        design5 = "";
+        pathx = "Data/Notices/event/";
     }
 
     private void adm_btn()
     {
         data = admlist;
+        fdata = fadmlist;
+        design5 = "background-color: #44a16d;";
+        design1 = "";
+        design2 = "";
+        design3 = "";
+        design4 = "";
+        pathx = "Data/Notices/adm/";
     }
+
+    private void delete_notice()
+    {
+        File.Delete("wwwroot/receipt.pdf");
+    }
+    
 }

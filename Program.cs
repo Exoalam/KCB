@@ -2,6 +2,7 @@ using KCB.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Blazored.LocalStorage;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<DataBase>();
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddSyncfusionBlazor(options => { options.IgnoreScriptIsolation = true; });
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjgwNTI2QDMyMzAyZTMyMmUzMGVDVmJ6MjJUalU0dlV2WjZHQlhUQjREMi9sL0R3KzVPM0RZMkpDaFVLK2M9");
 
 var app = builder.Build();
 

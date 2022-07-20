@@ -51,6 +51,20 @@ namespace KCB.Data
             return "Account created";
         }
 
+        public void creat_notice(string name, string fname, string type)
+        {
+            var database = dbClient.GetDatabase("Notice");
+            var collection = database.GetCollection<BsonDocument>(type);
+            var document = new BsonDocument { { "name", name }, { "fname", fname }};
+            collection.InsertOne(document);
+        }
+
+        public void delete_notice(string name, string type)
+        {
+            var database = dbClient.GetDatabase("Notice");
+            var collection = database.GetCollection<BsonDocument>(type);
+            collection.DeleteOne(new BsonDocument { { "name", name } });
+        }
         public int get_tid()
         {
             int tid = 0;
@@ -127,6 +141,18 @@ namespace KCB.Data
             foreach (BsonDocument doc in documents)
             {
                 arlist.Add(doc["name"].ToString());
+            }
+            return arlist;
+        }
+        public ArrayList get_noticef(string type)
+        {
+            var arlist = new ArrayList();
+            var database = dbClient.GetDatabase("Notice");
+            var collection = database.GetCollection<BsonDocument>(type);
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                arlist.Add(doc["fname"].ToString());
             }
             return arlist;
         }
