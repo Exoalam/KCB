@@ -591,3 +591,87 @@ a, .btn-link {
         background-color: #4CAF50;
         color: white;
     }
+
+.Notice_Panel {
+    margin: 50px auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+    background-color: #c6c6c67b;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px black;
+    border-radius: 2px;
+}
+
+
+
+#Notice_Nav_Panel {
+    display: flex;
+    flex-direction: column;
+    background-color: #c6c6c69e;
+    border-right: 1px solid black;
+}
+
+    #Notice_Nav_Panel button {
+        box-shadow: none;
+        border: none;
+        padding: 0 50px 0 50px;
+        margin: 10px;
+        text-align: center;
+        height: 50px;
+        background-color: transparent;
+        font-weight: bold;
+        border-bottom: 1px solid black;
+    }
+
+        #Notice_Nav_Panel button:hover {
+            background-color: #87ff79;
+        }
+
+            #Notice_Nav_Panel button:hover:active {
+                background-color: #31ff42;
+            }
+
+
+
+.Notice_Display_Panel {
+    border-radius: 2px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+    background-color: #c6c6c69e;
+}
+
+.nfile a{
+    box-shadow: none;
+    border: none;
+    padding: 0 50px 0 50px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+    .nfile a:hover {
+        background-color: #87ff79;
+    }
+
+        .nfile a:hover:active {
+            background-color: #31ff42;
+        }
+.nfile img {
+    height: 30px;
+    width: 30px;
+}
+
+.nfile img:hover {
+    height: 35px;
+    width: 35px;
+}
+
+    .nfile img:hover:active {
+        height: 30px;
+        width: 30px;
+    }

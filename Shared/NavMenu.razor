@@ -19,7 +19,7 @@
             </div>
         </div>
         <button class="nav_but" @onclick="Result_page">Result</button>
-        <button class="nav_but">Notice</button>
+        <button class="nav_but" @onclick="Notice_page">Notice</button>
         <div class="dropdown">
             <button class="nav_but">Academic</button>
             <div class="dropdown-content">
@@ -71,8 +71,17 @@
 
     private void Login_page()
     {
-        UriHelper.NavigateTo("Login");
+        if (!loginrender)
+        {
+            UriHelper.NavigateTo("Login");
+        }
     }
+
+    private void Notice_page()
+    {
+        UriHelper.NavigateTo("Notice");
+    }
+
 
     private void Result_page()
     {
