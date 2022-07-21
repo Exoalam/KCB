@@ -181,6 +181,22 @@ namespace KCB.Data
             return documents;
         }
 
+        public BsonDocument latest_hostory()
+        {
+            var database = dbClient.GetDatabase("Transaction");
+            var collection = database.GetCollection<BsonDocument>("transaction_history");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument doc in documents)
+            {
+                if (doc["t_id"].ToString() == (get_tid() - 1).ToString())
+                {
+                    return doc;
+                }
+            }
+            var result = new BsonDocument { { "SESSION", "NO DATA" } };
+            return result;
+        }
+
         public List<BsonDocument> get_users()
         {
             var database = dbClient.GetDatabase("Users");

@@ -2,6 +2,8 @@
 @using System.IO
 @using iText
 @using KCB.Data
+@using MongoDB.Bson;
+@using System.Collections;
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage BrowserStorage
 @inject IJSRuntime JsRuntime;
@@ -362,6 +364,12 @@
     public string cd_visibility = "none";
     public string bank_visibility = "none";
     public string done_visibility = "none";
+    string fdata1;
+    string fdata2;
+    string fdata3;
+    string fdata4;
+    string fdata5;
+    string fdata6;
     string cr0 = "320";
     string cr1 = "500";
     string cr2 = "40";
@@ -622,8 +630,68 @@
 
     public async void pdf_maker()
     {
+        BsonDocument fdata = new BsonDocument { };
+        fdata = database.latest_hostory();
+        var text = @"
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-        string html = total.ToString();
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Receipt</h2>
+
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>" + fdata["user"] + @"</th>
+  </tr>
+  <tr>
+    <td>Transaction ID</td>
+    <td> "+ fdata["t_id"] +@" </td>
+  </tr>
+  <tr>
+    <td>Payment Method</td>
+    <td> " + fdata["type"] +@"</td>
+  </tr>
+  <tr>
+    <td>Account Number</td>
+    <td>" + fdata["t_acc"] +@"</td>
+  </tr>
+  <tr>
+    <td>Amount</td>
+    <td> " + fdata["amount"] +@"TK</td>
+  </tr>
+  <tr>
+    <td>Due Type</td>
+    <td>" + fdata["fee_type"] + @"</td>
+  </tr>
+
+</table>
+
+</body>
+</html>
+
+
+";
+        string html = text;
         File.WriteAllText("receipt.html", html);
         iText.Html2pdf.HtmlConverter.ConvertToPdf(
         new FileInfo("receipt.html"),
