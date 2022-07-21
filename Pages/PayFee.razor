@@ -275,12 +275,12 @@
                     BKash
                     <img src="/Images/bkash.png" style="height: 30px; width: 30px" />
                 </button>
-                <button>
+                <button @onclick="card_payment">
                     Credit/Debit card
                     <img src="/Images/mc.png" style="height: 30px; width: 30px" />
                     <img src="/Images/vs.png" style="height: 30px; width: 30px" />
                 </button>
-                <button>
+                <button @onclick="bank_payment">
                     Bank
                     <img src="/Images/bk.png" style="height: 30px; width: 30px" />
                 </button>
@@ -304,13 +304,49 @@
             <p style="color:red; font-size: 20px">@warning</p>
             <button @onclick="done_payment">Process Payment</button>
         </div>
+        <div id="bk_payment" style="display:@cd_visibility; height: 100%; width:100%;flex-direction:column">
+            <p style="font-size: 36px; font-weight: bold;margin:auto; margin-bottom: 50px;">
+                Credit/Debit Card
+                <img src="/Images/mc.png" style="height: 50px; width: 50px" />
+            </p>
+            <div style="display:flex; flex-direction:row; margin:auto;">
+                <div style="display:flex; flex-direction:column">
+                    <label style="font-size: 20px;margin: 12px;">Mobile Number:</label>
+                    <label style="font-size: 20px;margin: 12px;">Amount:</label>
+                </div>
+                <div style="display:flex; flex-direction:column">
+                    <input type="number" placeholder="Type Card Number with CVV" @bind="mobile" />
+                    <input type="number" value="@amount" />
+                </div>
+            </div>
+            <p style="color:red; font-size: 20px">@warning</p>
+            <button @onclick="done_payment">Process Payment</button>
+        </div>
+        <div id="bk_payment" style="display:@bank_visibility; height: 100%; width:100%;flex-direction:column">
+            <p style="font-size: 36px; font-weight: bold;margin:auto; margin-bottom: 50px;">
+                Bank
+                <img src="/Images/bk.png" style="height: 50px; width: 50px" />
+            </p>
+            <div style="display:flex; flex-direction:row; margin:auto;">
+                <div style="display:flex; flex-direction:column">
+                    <label style="font-size: 20px;margin: 12px;">Mobile Number:</label>
+                    <label style="font-size: 20px;margin: 12px;">Amount:</label>
+                </div>
+                <div style="display:flex; flex-direction:column">
+                    <input type="number" placeholder="Type Bank Number with Bank Code" @bind="mobile" />
+                    <input type="number" value="@amount" />
+                </div>
+            </div>
+            <p style="color:red; font-size: 20px">@warning</p>
+            <button @onclick="done_payment">Process Payment</button>
+        </div>
         <div id="done_payment" style="display:@done_visibility; height: 100%; width:100%;flex-direction:column">
             <div style="margin:auto; display: flex; flex-direction: row">
                 <img style="height: 100px; width: 100px; margin: 10px;" src="/Images/payment Done.png" />
                 <p style="font-size: 36px; font-weight: bold; margin-top: 30px;">Payment Complete</p>
             </div>
             <a href="/receipt.pdf" download>Download Receipt</a>
-      
+
         </div>
     </div>
 </div>
@@ -365,6 +401,8 @@
         utility_visibility = "none";
         payment_visibility = "none";
         bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "none";
         done_visibility = "none";
         feetype = "";
     }
@@ -378,6 +416,8 @@
         utility_visibility = "none";
         payment_visibility = "none";
         bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "none";
         done_visibility = "none";
         feetype = "";
     }
@@ -391,6 +431,8 @@
         utility_visibility = "none";
         payment_visibility = "none";
         bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "none";
         done_visibility = "none";
         feetype = "";
     }
@@ -404,6 +446,8 @@
         utility_visibility = "flex";
         payment_visibility = "none";
         bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "none";
         done_visibility = "none";
         feetype = "";
     }
@@ -441,6 +485,8 @@
         utility_visibility = "none";
         payment_visibility = "flex";
         bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "none";
         done_visibility = "none";
     }
 
@@ -455,6 +501,42 @@
         utility_visibility = "none";
         payment_visibility = "none";
         bkash_visibility = "flex";
+        cd_visibility = "none";
+        bank_visibility = "none";
+        done_visibility = "none";
+        warning = "";
+    }
+
+    protected async Task card_payment()
+    {
+
+        amount = await JsRuntime.InvokeAsync<string>("ReadCookie.ReadCookie", "total");
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        cd_visibility = "flex";
+        bank_visibility = "none";
+        done_visibility = "none";
+        warning = "";
+    }
+
+    protected async Task bank_payment()
+    {
+
+        amount = await JsRuntime.InvokeAsync<string>("ReadCookie.ReadCookie", "total");
+        default_visibility = "none";
+        course_visibility = "none";
+        hall_visibility = "none";
+        library_visibility = "none";
+        utility_visibility = "none";
+        payment_visibility = "none";
+        bkash_visibility = "none";
+        cd_visibility = "none";
+        bank_visibility = "flex";
         done_visibility = "none";
         warning = "";
     }
@@ -473,6 +555,8 @@
                 utility_visibility = "none";
                 payment_visibility = "none";
                 bkash_visibility = "none";
+                cd_visibility = "none";
+                bank_visibility = "none";
                 done_visibility = "flex";
                 var result = await BrowserStorage.GetAsync<string>("name");
                 string Username = result.Value.ToString();
@@ -484,10 +568,61 @@
                 warning = "Invalid mobile number";
             }
         }
+        else if (cd_visibility != "none")
+        {
+            if (mobile != "" && mobile.Length == 19)
+            {
+                pdf_maker();
+                default_visibility = "none";
+                course_visibility = "none";
+                hall_visibility = "none";
+                library_visibility = "none";
+                utility_visibility = "none";
+                payment_visibility = "none";
+                bkash_visibility = "none";
+                cd_visibility = "none";
+                bank_visibility = "none";
+                done_visibility = "flex";
+                var result = await BrowserStorage.GetAsync<string>("name");
+                string Username = result.Value.ToString();
+                database.add_transaction(Username, "Card", mobile, amount, feetype);
+            }
+
+            else
+            {
+                warning = "Invalid mobile number";
+            }
+        }
+        else if (bank_visibility != "none")
+        {
+            if (mobile != "" && mobile.Length == 20)
+            {
+                pdf_maker();
+                default_visibility = "none";
+                course_visibility = "none";
+                hall_visibility = "none";
+                library_visibility = "none";
+                utility_visibility = "none";
+                payment_visibility = "none";
+                bkash_visibility = "none";
+                cd_visibility = "none";
+                bank_visibility = "none";
+                done_visibility = "flex";
+                var result = await BrowserStorage.GetAsync<string>("name");
+                string Username = result.Value.ToString();
+                database.add_transaction(Username, "Bank", mobile, amount, feetype);
+            }
+
+            else
+            {
+                warning = "Invalid mobile number";
+            }
+        }
     }
 
     public async void pdf_maker()
     {
+
         string html = total.ToString();
         File.WriteAllText("receipt.html", html);
         iText.Html2pdf.HtmlConverter.ConvertToPdf(
