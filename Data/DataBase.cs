@@ -180,6 +180,29 @@ namespace KCB.Data
             var documents = collection.Find(new BsonDocument()).ToList();
             return documents;
         }
+
+        public List<BsonDocument> get_users()
+        {
+            var database = dbClient.GetDatabase("Users");
+            var collection = database.GetCollection<BsonDocument>("UserLogin");
+            var documents = collection.Find(new BsonDocument()).ToList();
+            return documents;
+        }
+
+        public void up_users(string user, BsonDocument b)
+        {
+            var database = dbClient.GetDatabase("Users");
+            var collection = database.GetCollection<BsonDocument>("UserLogin");
+            var filter = Builders<BsonDocument>.Filter.Eq("user", user);
+            var Update1 = Builders<BsonDocument>.Update.Set("cd", b["cd"]);
+            var Update2 = Builders<BsonDocument>.Update.Set("hd", b["hd"]);
+            var Update3 = Builders<BsonDocument>.Update.Set("ld", b["ld"]);
+            var Update4 = Builders<BsonDocument>.Update.Set("ud", b["ud"]);
+            collection.UpdateOne(filter, Update1);
+            collection.UpdateOne(filter, Update2);
+            collection.UpdateOne(filter, Update3);
+            collection.UpdateOne(filter, Update4);
+        }
     }
 
 }

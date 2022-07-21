@@ -3,6 +3,7 @@
 @using KCB.Data
 @using MongoDB.Bson
 @inject DataBase database
+@inject NavigationManager _navigationManager
 
 <div class="common_panel" style="background-color: #c6c6c69e; height:700px; width: 60%; margin: 20px auto; flex-direction: column">
     @if (!NavMenu.adminpermission)
@@ -38,31 +39,35 @@
     {
         <div style="display: flex; flex-direction: row">
             <div style="display: flex; flex-direction: column; margin: auto">
-                <select id="Username_in" size=1000 style="height: 400px; width: 500px; background-image: none;">
+                <select @bind="selecteddata" @ondblclick="check" id="Username_in" size=1000 style="height: 400px; width: 500px; background-image: none; font-size: 16px;font-weight:bold">
+                    @foreach (var item in listusers)
+                    {
+                        <option>@item["user"]</option>
+                    }
                 </select>
                 <div style="display: flex; flex-direction:column">
                     <div style="display: flex; flex-direction:row">
                         <div style="display: flex; flex-direction:column; margin: 10px">
                             <p style="font-size: 16px;font-weight:bold">Course Due</p>
-                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                            <input id="Username_in" @bind="cd" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
                         </div>
                         <div style="display: flex; flex-direction:column; margin: 10px">
                             <p style="font-size: 16px;font-weight:bold">Hall Due</p>
-                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                            <input id="Username_in" @bind="hd" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
                         </div>
                     </div>
-                     <div style="display: flex; flex-direction:row">
+                    <div style="display: flex; flex-direction:row">
                         <div style="display: flex; flex-direction:column;margin: 10px">
                             <p style="font-size: 16px;font-weight:bold">Library Due</p>
-                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                            <input id="Username_in" @bind="ld" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
                         </div>
                         <div style="display: flex; flex-direction:column; margin: 10px">
                             <p style="font-size: 16px;font-weight:bold">Utility Due</p>
-                            <input id="Username_in" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
+                            <input id="Username_in" @bind="ud" placeholder="type your Due" style="background-image: none; width: 100%;" type="text" />
                         </div>
                     </div>
                 </div>
-                <button class="Notice_Nav_Panelb">Update</button>
+                <button class="Notice_Nav_Panelb" @onclick="update">Update</button>
             </div>
             <div style="display: flex; flex-direction: column; overflow: auto; height: 700px;">
                 @foreach (var doc in listdata)
@@ -87,9 +92,32 @@
 @code {
     BsonDocument data = new BsonDocument { };
     List<BsonDocument> listdata = new List<BsonDocument>();
+    List<BsonDocument> listusers = new List<BsonDocument>();
+    string selecteddata;
+    string cd = "";
+    string hd = "";
+    string ld = "";
+    string ud = "";
     protected override void OnInitialized()
     {
         data = database.get_due(NavMenu.Username);
         listdata = database.get_hostory();
+        listusers = database.get_users();
+    }
+
+    private void check()
+    {
+        BsonDocument datax = new BsonDocument { };
+        datax = database.get_due(selecteddata);
+        cd = datax["cd"].ToString();
+        hd = datax["hd"].ToString();
+        ld = datax["ld"].ToString();
+        ud = datax["ud"].ToString();
+    }
+    private void update()
+    {
+        BsonDocument datax = new BsonDocument { {"cd", cd}, {"hd", hd}, {"ld", ld}, {"ud", ud} };
+        database.up_users(selecteddata, datax);
+        _navigationManager.NavigateTo("/Profile", true);
     }
 }
